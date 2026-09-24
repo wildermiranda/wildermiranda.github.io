@@ -15,21 +15,23 @@
 
     <style>
         /* ==========================================================================
-           VARIÁVEIS DE DESIGN E CORES (Azul, Preto e Elegância Minimalista)
+           PALETA E ESTILOS INSPIRADOS NO THINGS (CULTURED CODE + WCAG)
            ========================================================================== */
         :root {
-            --primary-blue: #0052cc;
-            --primary-gradient: linear-gradient(135deg, #0a2540 0%, #0052cc 100%);
-            --accent-blue: #2563eb;
-            --accent-light-blue: #3b82f6;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
-            --bg-light: #ffffff;
-            --bg-offset: #f8fafc;
-            --footer-bg: #0b0f19;
-            --font-family: 'IBM Plex Sans', sans-serif;
-            --border-radius: 8px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Cores das Fontes (Ajustadas para Contraste AA >= 4.5:1) */
+            --text-heading: #1A1D20;
+            --text-body: #3C424C; 
+            --text-muted: #57606A;
+            
+            /* Botões e Acentos Cultured Code (Ajustado tom de azul para contraste de texto branco) */
+            --btn-blue: #4F90F7;
+            --btn-blue-hover: #4f8ff7dd;
+            --btn-shadow: rgba(32, 101, 214, 0.25);
+            
+            --border-subtle: #D0D7DE;
+            --border-radius-btn: 10px;
+            --font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition: all 0.25s ease;
         }
 
         /* Reset e Base */
@@ -45,8 +47,8 @@
 
         body {
             font-family: var(--font-family);
-            color: var(--text-dark);
-            background-color: var(--bg-light);
+            color: var(--text-body);
+            background-color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -57,9 +59,16 @@
             color: inherit;
         }
 
+        /* Foco Visível para Acessibilidade por Teclado */
+        a:focus-visible, button:focus-visible {
+            outline: 3px solid var(--btn-blue);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
         .container {
             width: 100%;
-            max-width: 1100px;
+            max-width: 960px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -67,64 +76,67 @@
         /* Tipografia */
         h1, h2, h3 {
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.25;
+            color: var(--text-heading);
+            letter-spacing: -0.4px;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 3rem;
-            color: var(--text-dark);
+            font-size: 1.85rem;
+            margin-bottom: 3.5rem;
+            color: var(--text-heading);
         }
 
-        /* Botões */
+        /* Botões Estilo Things com Touch Target Adequado */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 28px;
-            border: 1.5px solid var(--accent-blue);
-            color: var(--accent-blue);
-            border-radius: 4px;
+            padding: 12px 26px;
+            background-color: #ffffff;
+            color: var(--text-heading);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--border-radius-btn);
             font-weight: 600;
             font-size: 0.95rem;
             transition: var(--transition);
             cursor: pointer;
-            background: transparent;
-            text-align: center;
-            min-height: 48px; /* Otimizado para toque em telas móveis */
+            min-height: 48px; /* Recomendação WCAG para toque */
         }
 
         .btn:hover, .btn:active {
-            background-color: var(--accent-blue);
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            background-color: #f4f6f8;
+            color: var(--text-heading);
+            border-color: #b0b7be;
+            transform: translateY(-1px);
         }
 
-        .btn-light {
-            border-color: #ffffff;
+        .btn-primary {
+            background-color: var(--btn-blue);
             color: #ffffff;
+            border: none;
         }
 
-        .btn-light:hover, .btn-light:active {
-            background-color: #ffffff;
-            color: var(--primary-blue);
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        .btn-primary:hover, .btn-primary:active {
+            background-color: #4f8ff7dd;
+            border: none; 
+            color: #ffffff;
+            transform: translateY(-1px);
         }
 
         /* ==========================================================================
-           1. HERÓI (TELA CHEIA RESPONSIVA)
+           1. HERÓI (TELA INTEIRA - ALINHAMENTO À ESQUERDA)
            ========================================================================== */
         .hero {
             min-height: 100vh;
-            min-height: 100dvh; /* Dynamic Viewport Height para navegadores mobile */
+            min-height: 100dvh;
             display: flex;
             align-items: center;
-            background-color: var(--bg-light);
-            padding: 40px 0;
+            justify-content: flex-start;
+            text-align: left;
+            background: linear-gradient(180deg, #FBFCFE 85%, #FFFFFF 100%);
+            padding: 80px 0;
             position: relative;
         }
 
@@ -132,257 +144,225 @@
             max-width: 650px;
         }
 
-        .hero h1 {
-            font-size: 3.2rem;
-            color: var(--text-dark);
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-            word-break: break-word;
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 3rem;
         }
 
-        .hero h1 span {
-            color: var(--accent-blue);
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            margin-bottom: 12px;
+            color: var(--text-body)
         }
 
         .hero h2 {
-            font-size: 2.2rem;
-            color: var(--text-dark);
-            font-weight: 700;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--text-body);
+            font-weight: 400;
             margin-bottom: 32px;
         }
 
-        /* Indicador de rolagem suave */
+        /* Seta centralizada na tela */
         .scroll-down {
             position: absolute;
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             animation: bounce 2s infinite;
-            padding: 10px;
+            padding: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-            40% { transform: translate(-50%, -10px); }
-            60% { transform: translate(-50%, -5px); }
+            40% { transform: translate(-50%, -8px); }
+            60% { transform: translate(-50%, -4px); }
+        }
+
+        /* Respeito às preferências de redução de movimento (Acessibilidade) */
+        @media (prefers-reduced-motion: reduce) {
+            .scroll-down {
+                animation: none;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+            .project-item:hover .project-image img,
+            .btn:hover, .btn-primary:hover {
+                transform: none;
+            }
         }
 
         /* ==========================================================================
-           2. SOBRE MIM (Corte Diagonal com Gradiente Azul e Preto)
+           2. SOBRE MIM (GRADIENTE DE #FFFFFF PARA #FBFCFE)
            ========================================================================== */
-        .about-wrapper {
-            position: relative;
-            background: var(--primary-gradient);
-            color: #ffffff;
-            padding: 110px 0;
-            clip-path: polygon(0 4vw, 100% 0, 100% calc(100% - 4vw), 0 100%);
-            margin: 20px 0 40px;
-        }
-
-        .about-title {
-            text-align: center;
-            color: #ffffff;
-            margin-bottom: 45px;
+        .about-section {
+            background: linear-gradient(180deg, #FFFFFF 85%, #FBFCFE 100%);
+            padding: 100px 0;
         }
 
         .about-grid {
             display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 45px;
+            grid-template-columns: 220px 1fr;
+            gap: 48px;
             align-items: center;
         }
 
         .about-img-container img {
             width: 100%;
-            height: 280px;
+            height: 250px;
             object-fit: cover;
-            border-radius: var(--border-radius);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            border: 1px solid var(--border-subtle);
         }
 
         .about-text p {
             margin-bottom: 18px;
-            font-size: 1.08rem;
-            font-weight: 300;
-            opacity: 0.95;
+            font-size: 1.05rem;
+            color: var(--text-body);
             line-height: 1.7;
         }
 
+        .about-text p strong {
+            color: var(--text-heading);
+        }
+
         /* ==========================================================================
-           3. PROJETOS (Layout Limpo e Adaptável)
+           3. PROJETOS (GRADIENTE DE #FBFCFE PARA #FFFFFF)
            ========================================================================== */
-        .projects {
-            padding: 80px 0;
+        .projects-section {
+            background: linear-gradient(180deg, #FBFCFE 85%, #FFFFFF 100%);
+            padding: 100px 0;
         }
 
         .project-item {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 55px;
+            gap: 48px;
             align-items: center;
             margin-bottom: 80px;
         }
 
+        .project-item:last-child {
+            margin-bottom: 0;
+        }
+
         .project-info h3 {
-            font-size: 1.55rem;
-            margin-bottom: 14px;
-            color: var(--text-dark);
+            font-size: 1.5rem;
+            margin-bottom: 12px;
         }
 
         .project-info p {
-            color: var(--text-muted);
-            margin-bottom: 22px;
-            font-size: 0.98rem;
-            line-height: 1.7;
+            color: var(--text-body);
+            margin-bottom: 24px;
+            font-size: 1rem;
+            line-height: 1.65;
         }
 
         .project-buttons {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .project-image {
             width: 100%;
-            border-radius: var(--border-radius);
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
-            transition: var(--transition);
-            border: 1px solid #e2e8f0;
-        }
-
-        .project-image:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 36px rgba(15, 23, 42, 0.15);
-            border-color: var(--accent-light-blue);
+            border: 1px solid var(--border-subtle);
         }
 
         .project-image img {
             width: 100%;
-            height: 310px;
+            height: 270px;
             object-fit: cover;
             display: block;
+            transition: var(--transition);
+        }
+
+        .project-item:hover .project-image img {
+            transform: scale(1.02);
         }
 
         /* ==========================================================================
-           4. CONTATO (Banner Azul Escuro)
+           4. CONTATO (#FFFFFF - MANTIDO SÓLIDO ANTES DO FOOTER)
            ========================================================================== */
-        .contact-wrapper {
-            background: var(--primary-gradient);
-            color: #ffffff;
-            padding: 100px 0 90px;
+        .contact-section {
+            background-color: #ffffff;
+            padding: 100px 0;
             text-align: center;
-            clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
         }
 
-        .contact-wrapper h2 {
+        .contact-content {
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .contact-content h2 {
             font-size: 2.1rem;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
-        .contact-wrapper p {
-            font-size: 1.15rem;
-            font-weight: 300;
-            margin-bottom: 28px;
-            opacity: 0.9;
+        .contact-content p {
+            font-size: 1.1rem;
+            color: var(--text-body);
+            margin-bottom: 32px;
         }
 
         /* ==========================================================================
-           5. RODAPÉ (Preto Elegante)
+           5. RODAPÉ (#FBFCFE - MANTIDO SÓLIDO COMO ESTAVA)
            ========================================================================== */
         footer {
-            background-color: var(--footer-bg);
-            color: #64748b;
-            padding: 45px 0 25px;
+            background-color: #fbfcfe;
+            color: var(--text-muted);
+            padding: 40px 0 30px;
             text-align: center;
+            border-top: 1px solid var(--border-subtle);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 24px;
-            margin-bottom: 22px;
+            gap: 16px;
+            margin-bottom: 18px;
         }
 
         .social-links a {
             font-size: 1.5rem;
-            color: #f8fafc;
-            padding: 8px;
+            color: var(--text-body);
+            padding: 12px; /* Área de toque expandida */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             transition: var(--transition);
         }
 
         .social-links a:hover {
-            color: var(--accent-light-blue);
+            color: var(--btn-blue);
             transform: translateY(-2px);
         }
 
         .copyright {
             font-size: 0.88rem;
-            color: #94a3b8;
+            color: var(--text-muted);
         }
 
         /* ==========================================================================
-           MEDIA QUERIES - RESPONSIVIDADE PARA TABLETS E DISPOSITIVOS MÓVEIS
+           RESPONSIVIDADE (TABLETS E MOBILE)
            ========================================================================== */
-
-        /* Tablets (Até 992px) */
-        @media (max-width: 992px) {
-            .container {
-                padding: 0 20px;
-            }
-
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-
-            .hero h2 {
-                font-size: 1.9rem;
-            }
-
-            .project-item {
-                gap: 35px;
-            }
-        }
-
-        /* Dispositivos Móveis e Celulares (Até 768px) */
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: 1.6rem;
-                margin-bottom: 2rem;
-            }
-
-            /* Hero */
-            .hero {
-                padding: 60px 0;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-                line-height: 1.25;
-            }
-
-            .hero h2 {
-                font-size: 1.4rem;
-                margin-bottom: 24px;
-            }
-
-            .hero .btn {
-                width: 100%; /* Botão full-width em celulares */
-            }
-
-            /* Sobre Mim */
-            .about-wrapper {
-                padding: 80px 0;
-                clip-path: polygon(0 6vw, 100% 0, 100% calc(100% - 6vw), 0 100%);
-            }
-
+        @media (max-width: 868px) {
             .about-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 28px;
                 text-align: center;
             }
 
@@ -393,23 +373,17 @@
             }
 
             .about-text p {
-                font-size: 1rem;
                 text-align: left;
-            }
-
-            /* Projetos */
-            .projects {
-                padding: 50px 0;
             }
 
             .project-item {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 24px;
                 margin-bottom: 60px;
             }
 
             .project-item .project-image {
-                order: 1; /* Exibe a imagem primeiro */
+                order: 1;
             }
 
             .project-item .project-info {
@@ -420,179 +394,161 @@
                 height: 220px;
             }
 
-            .project-info h3 {
-                font-size: 1.35rem;
-            }
-
-            .project-info p {
-                font-size: 0.92rem;
-                margin-bottom: 16px;
-            }
-
             .project-buttons {
                 flex-direction: column;
-                gap: 10px;
             }
 
             .project-buttons .btn {
                 width: 100%;
             }
-
-            /* Contato */
-            .contact-wrapper {
-                padding: 70px 0 60px;
-                clip-path: polygon(0 5vw, 100% 0, 100% 100%, 0 100%);
-            }
-
-            .contact-wrapper h2 {
-                font-size: 1.7rem;
-            }
-
-            .contact-wrapper p {
-                font-size: 1rem;
-            }
-
-            .contact-wrapper .btn {
-                width: 100%;
-            }
         }
 
-        /* Celulares Pequenos (Até 480px) */
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.85rem;
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 20px;
             }
 
-            .hero h2 {
-                font-size: 1.2rem;
+            .about-section, .projects-section, .contact-section {
+                padding: 60px 0;
             }
 
-            .scroll-down {
-                display: none;
+            .section-title {
+                margin-bottom: 2.5rem;
+                font-size: 1.6rem;
+            }
+
+            .btn {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- HERÓI (TELA CHEIA RESPONSIVA) -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Olá, meu nome é <span>Wilder Miranda</span></h1>
-                <h2>Sou Analista de Dados</h2>
-                <a href="#about" class="btn">Saiba mais</a>
-            </div>
-        </div>
-        <a href="#about" class="scroll-down" aria-label="Rolar para baixo">
-            <i class="fas fa-chevron-down"></i>
-        </a>
-    </section>
-
-    <!-- SOBRE MIM -->
-    <div class="about-wrapper" id="about">
-        <div class="container">
-            <h2 class="section-title about-title">Sobre Mim</h2>
-            <div class="about-grid">
-                <div class="about-img-container">
-                    <img src="./me.jpg" alt="Foto de Perfil">
-                </div>
-                <div class="about-text">
-                    <p>Experiência como Analista com expertise no desenvolvimento de soluções que envolve dados e automação de processos.</p>
-                    <p>Busco transformar dados complexos em soluções claras e acionáveis, unindo lógica estruturada, boas práticas e interfaces visuais eficientes para tomadas de decisão estratégicas.</p>
-                    <p>→ Analytics & BI: Excel Avançado, Noções de SQL para análise de dados e criação de insights com Streamlit.</p>
-                
+    <main>
+        <!-- 1. HERÓI (Full Screen / Left Aligned) -->
+        <section class="hero" aria-label="Apresentação Principal">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-icon" aria-hidden="true">
+                        💻
+                    </div>
+                    <h1>Olá, meu nome é <span>Wilder Miranda</span></h1>
+                    <h2>Sou Analista de Dados</h2>
+                    <a href="#about" class="btn btn-primary js-smooth-scroll">Saiba mais sobre mim</a>
                 </div>
             </div>
-        </div>
-    </div>
+            <!-- Seta centralizada na tela -->
+            <a href="#about" class="scroll-down js-smooth-scroll" aria-label="Rolar para a seção Sobre Mim">
+                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </a>
+        </section>
 
-    <!-- PROJETOS -->
-    <section class="projects">
-        <div class="container">
-            <h2 class="section-title">Projetos</h2>
-
-            <!-- Projeto 1 -->
-            <div class="project-item">
-                <div class="project-image">
-                    <img src="./contratos.png" alt="Gestão de Contratos">
-                </div>
-                <div class="project-info">
-                    <h3>Gestão de Contratos</h3>
-                    <p>Dashboard interativo com Tabela Dinâmica e Power Query, para quem gosta de explorar os dados, cruzar informações e tirar insights no próprio Excel.</p>
-                    <div class="project-buttons">
-                        <a href="https://www.youtube.com/watch?v=yniZXFbitWw&t=15s" target="_blank" class="btn">Ver Mais</a>
+        <!-- 2. SOBRE MIM (Gradiente #FFFFFF -> #FBFCFE) -->
+        <section class="about-section" id="about" aria-label="Sobre Mim">
+            <div class="container">
+                <h2 class="section-title">Sobre Mim</h2>
+                <div class="about-grid">
+                    <div class="about-img-container">
+                        <img src="./me.jpg" alt="Foto de perfil de Wilder Miranda">
+                    </div>
+                    <div class="about-text">
+                        <p>Experiência como Analista com expertise no desenvolvimento de soluções que envolvem dados e automação de processos.</p>
+                        <p>Busco transformar dados complexos em soluções claras e acionáveis, unindo lógica estruturada, boas práticas e interfaces visuais eficientes para tomadas de decisão estratégicas.</p>
+                        <p><strong>→ Analytics & BI:</strong> Excel Avançado, Noções de SQL para análise de dados e criação de insights com Streamlit.</p>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Projeto 2 -->
-            <div class="project-item">
-                <div class="project-image">
-                    <img src="./sales-metrics.png" alt="Dashboard de Vendas de Automóveis">
-                </div>
-                <div class="project-info">
-                    <h3>Dashboard de Vendas de Automóveis</h3>
-                    <p>Projeto prático de análise de dados onde pude transformar dados brutos armazenados em um banco de dados PostgreSQL em insights visuais interativos com Streamlit e Plotly.</p>
-                    <div class="project-buttons">
-                        <a href="https://www.youtube.com/watch?v=Rnu03wLBQzU&t=46s" target="_blank" class="btn">Ver Mais</a>
-                        <a href="https://github.com/wildermiranda/SalesDashboard" target="_blank" class="btn">Acessar Código</a>
+        <!-- 3. PROJETOS (Gradiente #FBFCFE -> #FFFFFF) -->
+        <section class="projects-section" id="projects" aria-label="Projetos Desenvolvidos">
+            <div class="container">
+                <h2 class="section-title">Projetos</h2>
+
+                <!-- Projeto 1 -->
+                <article class="project-item">
+                    <div class="project-image">
+                        <img src="./contratos.png" alt="Visualização do Dashboard de Gestão de Contratos">
                     </div>
+                    <div class="project-info">
+                        <h3>Gestão de Contratos</h3>
+                        <p>Dashboard interativo com Tabela Dinâmica e Power Query, para quem gosta de explorar os dados, cruzar informações e tirar insights no próprio Excel.</p>
+                        <div class="project-buttons">
+                            <a href="https://www.youtube.com/watch?v=yniZXFbitWw&t=15s" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Ver vídeo do projeto Gestão de Contratos no YouTube (abre em nova aba)">Ver Mais</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Projeto 2 -->
+                <article class="project-item">
+                    <div class="project-image">
+                        <img src="./sales-metrics.png" alt="Visualização do Dashboard de Vendas de Automóveis">
+                    </div>
+                    <div class="project-info">
+                        <h3>Dashboard de Vendas de Automóveis</h3>
+                        <p>Projeto prático de análise de dados onde pude transformar dados brutos armazenados em um banco de dados PostgreSQL em insights visuais interativos com Streamlit e Plotly.</p>
+                        <div class="project-buttons">
+                            <a href="https://www.youtube.com/watch?v=Rnu03wLBQzU&t=46s" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Ver vídeo do Dashboard de Vendas no YouTube (abre em nova aba)">Ver Mais</a>
+                            <a href="https://github.com/wildermiranda/SalesDashboard" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Acessar código do projeto no GitHub (abre em nova aba)">Acessar Código</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- 4. CONTATO (#FFFFFF - MANTIDO SÓLIDO ANTES DO FOOTER) -->
+        <section class="contact-section" id="contact" aria-label="Contato">
+            <div class="container">
+                <div class="contact-content">
+                    <h2>Contato</h2>
+                    <p>Quer conversar sobre novos projetos ou oportunidades? Entre em contato!</p>
+                    <a href="mailto:contatowildermiranda@gmail.com" class="btn btn-primary" aria-label="Enviar um e-mail para Wilder Miranda">Enviar E-mail</a>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <!-- Projeto 3 -->
-            <!-- <div class="project-item">
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=800" alt="Web Scraping Python">
-                </div>
-                <div class="project-info">
-                    <h3>Automação de Web Scraping em Python</h3>
-                    <p>Scripts desenvolvidos com BeautifulSoup e Selenium para coleta massiva e extração automatizada de dados da web, com tratamento de exceções e exportação estruturada em múltiplos formatos.</p>
-                    <div class="project-buttons">
-                        <a href="#" class="btn">Ver Mais</a>
-                        <a href="#" class="btn">Acessar Código</a>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Projeto 4 -->
-            <!-- <div class="project-item">
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800" alt="Análise de Funil de Conversão">
-                </div>
-                <div class="project-info">
-                    <h3>Análise de Funil de Conversão & Churn Metric</h3>
-                    <p>Simulação e análise de métricas de produto em ambiente fintech, monitorando o comportamento do usuário ao longo do funil de conversão e identificando gargalos para mitigação de churn.</p>
-                    <div class="project-buttons">
-                        <a href="#" class="btn">Ver Mais</a>
-                        <a href="#" class="btn">Acessar Código</a>
-                    </div>
-                </div>
-            </div> -->
-
-        </div>
-    </section>
-
-    <!-- CONTATO -->
-    <div class="contact-wrapper">
-        <div class="container">
-            <h2>CONTATO</h2>
-            <p>Quer conversar sobre novos projetos ou oportunidades? Entre em contato!</p>
-            <a href="mailto:contatowildermiranda@gmail.com" class="btn btn-light">Enviar E-mail</a>
-        </div>
-    </div>
-
-    <!-- RODAPÉ -->
+    <!-- 5. RODAPÉ (#FBFCFE - MANTIDO SÓLIDO COMO ESTAVA) -->
     <footer>
         <div class="container">
             <div class="social-links">
-                <a href="https://www.linkedin.com/in/wildermiranda" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/wildermiranda" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/wildermiranda" target="_blank" rel="noopener noreferrer" aria-label="Perfil do LinkedIn de Wilder Miranda (abre em nova aba)">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/wildermiranda" target="_blank" rel="noopener noreferrer" aria-label="Perfil do GitHub de Wilder Miranda (abre em nova aba)">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                </a>
             </div>
             <p class="copyright">&copy; 2026 - Desenvolvido por Wilder Miranda</p>
         </div>
     </footer>
 
+    <!-- Script para Rolagem Suave sem alterar a URL -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Se a URL já tiver o hash ao carregar a página, limpa a URL sem recarregar
+            if (window.location.hash) {
+                history.replaceState(null, document.title, window.location.pathname + window.location.search);
+            }
+
+            // Seleciona os links da primeira seção
+            const smoothLinks = document.querySelectorAll('.js-smooth-scroll');
+
+            smoothLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    const targetSection = document.getElementById('about');
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
