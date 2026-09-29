@@ -3,552 +3,424 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio | Desenvolvedor & Analista de Dados</title>
+    <title>Wilder Miranda | Analista de Dados</title>
     
-    <!-- Importação da fonte IBM Plex Sans -->
+    <!-- Importação das Fontes: Inter (Títulos), IBM Plex Sans (Corpo) e JetBrains Mono (Links por extenso) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=Inter:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Ícones via FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* ==========================================================================
-           PALETA E ESTILOS INSPIRADOS NO THINGS (CULTURED CODE + WCAG)
+           1. VARIÁVEIS DE COR E TIPOGRAFIA (EXCLUSIVO DARK MODE)
            ========================================================================== */
         :root {
-            /* Cores das Fontes (Ajustadas para Contraste AA >= 4.5:1) */
-            --text-heading: #1A1D20;
-            --text-body: #3C424C; 
-            --text-muted: #57606A;
+            --bg: #111111;
+            --fg: #EEEEEE;
+            --muted: #A0A0A0;
+            --line: #2A2A2A;
+            --accent: #4F90F7;
             
-            /* Botões e Acentos Cultured Code (Ajustado tom de azul para contraste de texto branco) */
-            --btn-blue: #4F90F7;
-            --btn-blue-hover: #4f8ff7dd;
-            --btn-shadow: rgba(32, 101, 214, 0.25);
+            --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
             
-            --border-subtle: #D0D7DE;
-            --border-radius-btn: 10px;
-            --font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --transition: all 0.25s ease;
+            --transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
         }
 
         /* Reset e Base */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         html {
+            font-size: 16px;
             scroll-behavior: smooth;
         }
 
         body {
-            font-family: var(--font-family);
-            color: var(--text-body);
-            background-color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            min-height: 100vh;
             -webkit-font-smoothing: antialiased;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Foco Visível para Acessibilidade por Teclado */
-        a:focus-visible, button:focus-visible {
-            outline: 3px solid var(--btn-blue);
-            outline-offset: 3px;
-            border-radius: 4px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 960px;
+        .wrap {
+            max-width: 42rem;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 3rem 1.5rem 4rem;
         }
 
-        /* Tipografia */
-        h1, h2, h3 {
+        /* Títulos com a fonte Inter */
+        h1, h2, h3, .name {
+            font-family: var(--font-heading);
+            color: var(--fg);
+            letter-spacing: -0.02em;
+        }
+
+        .name {
+            font-size: 1.15rem;
             font-weight: 700;
-            line-height: 1.25;
-            color: var(--text-heading);
-            letter-spacing: -0.4px;
         }
 
-        .section-title {
-            text-align: center;
-            font-size: 1.85rem;
-            margin-bottom: 3.5rem;
-            color: var(--text-heading);
+        /* Links por extenso usam a fonte JetBrains Mono */
+        .mono-link, 
+        .contact-list a {
+            font-family: var(--font-mono);
+            font-size: 0.9em;
         }
 
-        /* Botões Estilo Things com Touch Target Adequado */
-        .btn {
-            display: inline-flex;
+        /* ==========================================================================
+           2. CABEÇALHO E MENU CENTRALIZADO
+           ========================================================================== */
+        header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            padding: 12px 26px;
-            background-color: #ffffff;
-            color: var(--text-heading);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--border-radius-btn);
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 3rem;
+        }
+
+        /* Menu de Navegação Centralizado */
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            margin: 0 auto;
+        }
+
+        nav button {
+            background: none;
+            border: 0;
+            font-family: var(--font-body);
+            font-size: 0.98rem;
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition);
+            color: var(--muted);
             cursor: pointer;
-            min-height: 48px; /* Recomendação WCAG para toque */
-        }
-
-        .btn:hover, .btn:active {
-            background-color: #f4f6f8;
-            color: var(--text-heading);
-            border-color: #b0b7be;
-            transform: translateY(-1px);
-        }
-
-        .btn-primary {
-            background-color: var(--btn-blue);
-            color: #ffffff;
-            border: none;
-        }
-
-        .btn-primary:hover, .btn-primary:active {
-            background-color: #4f8ff7dd;
-            border: none; 
-            color: #ffffff;
-            transform: translateY(-1px);
-        }
-
-        /* ==========================================================================
-           1. HERÓI (TELA INTEIRA - ALINHAMENTO À ESQUERDA)
-           ========================================================================== */
-        .hero {
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            text-align: left;
-            background: linear-gradient(180deg, #FBFCFE 85%, #FFFFFF 100%);
-            padding: 80px 0;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 650px;
-        }
-
-        .hero-icon {
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            font-size: 3rem;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.2rem);
-            margin-bottom: 12px;
-            color: var(--text-body)
-        }
-
-        .hero h2 {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: var(--text-body);
-            font-weight: 400;
-            margin-bottom: 32px;
-        }
-
-        /* Seta centralizada na tela */
-        .scroll-down {
-            position: absolute;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--text-muted);
-            font-size: 1.3rem;
-            animation: bounce 2s infinite;
-            padding: 12px;
+            padding: 0.4rem 0.2rem;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+            min-height: 44px; /* Área de toque recomendada para mobile */
             display: inline-flex;
             align-items: center;
-            justify-content: center;
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-            40% { transform: translate(-50%, -8px); }
-            60% { transform: translate(-50%, -4px); }
+        nav button:hover {
+            color: var(--fg);
+            font-weight: 600;
         }
 
-        /* Respeito às preferências de redução de movimento (Acessibilidade) */
-        @media (prefers-reduced-motion: reduce) {
-            .scroll-down {
-                animation: none;
-            }
-            html {
-                scroll-behavior: auto;
-            }
-            .project-item:hover .project-image img,
-            .btn:hover, .btn-primary:hover {
-                transform: none;
-            }
+        nav button[aria-selected="true"] {
+            color: var(--fg);
+            font-weight: 600;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        section[hidden] {
+            display: none;
         }
 
         /* ==========================================================================
-           2. SOBRE MIM (GRADIENTE DE #FFFFFF PARA #FBFCFE)
+           3. SEÇÃO SOBRE MIM
            ========================================================================== */
-        .about-section {
-            background: linear-gradient(180deg, #FFFFFF 85%, #FBFCFE 100%);
-            padding: 100px 0;
+        h1 {
+            font-size: 2.1rem;
+            line-height: 1.25;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 48px;
-            align-items: center;
-        }
-
-        .about-img-container img {
-            width: 100%;
-            height: 250px;
+        .portrait {
+            display: block;
+            width: 13rem;
+            height: 15rem;
             object-fit: cover;
-            border-radius: 14px;
-            border: 1px solid var(--border-subtle);
+            border-radius: 10%;
+            margin-bottom: 1.75rem;
         }
 
-        .about-text p {
-            margin-bottom: 18px;
-            font-size: 1.05rem;
-            color: var(--text-body);
-            line-height: 1.7;
+        p {
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            color: var(--fg);
         }
 
-        .about-text p strong {
-            color: var(--text-heading);
+        .muted-text {
+            color: var(--muted);
         }
 
         /* ==========================================================================
-           3. PROJETOS (GRADIENTE DE #FBFCFE PARA #FFFFFF)
+           4. SEÇÃO PORTFÓLIO
            ========================================================================== */
-        .projects-section {
-            background: linear-gradient(180deg, #FBFCFE 85%, #FFFFFF 100%);
-            padding: 100px 0;
+        .portfolio {
+            list-style: none;
         }
 
-        .project-item {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: center;
-            margin-bottom: 80px;
+        .portfolio li {
+            padding: 2rem 0;
+            border-top: 1px solid var(--line);
         }
 
-        .project-item:last-child {
-            margin-bottom: 0;
+        .portfolio li:first-child {
+            border-top: 0;
+            padding-top: 0;
         }
 
-        .project-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
+        .portfolio h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
         }
 
-        .project-info p {
-            color: var(--text-body);
-            margin-bottom: 24px;
-            font-size: 1rem;
-            line-height: 1.65;
+        .portfolio img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+            transition: transform 0.25s ease;
         }
 
-        .project-buttons {
+        .portfolio li:hover img {
+            transform: scale(1.01);
+        }
+
+        .portfolio .tags {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .portfolio-links {
             display: flex;
-            gap: 12px;
+            gap: 1.25rem;
+            margin-top: 1rem;
             flex-wrap: wrap;
         }
 
-        .project-image {
-            width: 100%;
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 270px;
-            object-fit: cover;
-            display: block;
-            transition: var(--transition);
-        }
-
-        .project-item:hover .project-image img {
-            transform: scale(1.02);
-        }
-
-        /* ==========================================================================
-           4. CONTATO (#FFFFFF - MANTIDO SÓLIDO ANTES DO FOOTER)
-           ========================================================================== */
-        .contact-section {
-            background-color: #ffffff;
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .contact-content {
-            max-width: 550px;
-            margin: 0 auto;
-        }
-
-        .contact-content h2 {
-            font-size: 2.1rem;
-            margin-bottom: 14px;
-        }
-
-        .contact-content p {
-            font-size: 1.1rem;
-            color: var(--text-body);
-            margin-bottom: 32px;
-        }
-
-        /* ==========================================================================
-           5. RODAPÉ (#FBFCFE - MANTIDO SÓLIDO COMO ESTAVA)
-           ========================================================================== */
-        footer {
-            background-color: #fbfcfe;
-            color: var(--text-muted);
-            padding: 40px 0 30px;
-            text-align: center;
-            border-top: 1px solid var(--border-subtle);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 18px;
-        }
-
-        .social-links a {
-            font-size: 1.5rem;
-            color: var(--text-body);
-            padding: 12px; /* Área de toque expandida */
+        /* Links de Projetos com JetBrains Mono para URLs por extenso */
+        a.link-btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
+            gap: 0.5rem;
+            color: var(--fg);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--fg);
+            padding-bottom: 2px;
             transition: var(--transition);
         }
 
-        .social-links a:hover {
-            color: var(--btn-blue);
-            transform: translateY(-2px);
-        }
-
-        .copyright {
-            font-size: 0.88rem;
-            color: var(--text-muted);
+        a.link-btn:hover {
+            color: var(--accent);
         }
 
         /* ==========================================================================
-           RESPONSIVIDADE (TABLETS E MOBILE)
+           5. SEÇÃO CONTATO
            ========================================================================== */
-        @media (max-width: 868px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 28px;
-                text-align: center;
-            }
+        .contact-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
 
-            .about-img-container img {
-                max-width: 200px;
-                height: 240px;
-                margin: 0 auto;
-            }
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--line);
+        }
 
-            .about-text p {
-                text-align: left;
-            }
+        .contact-list li:last-child {
+            border: none;
+        }
 
-            .project-item {
-                grid-template-columns: 1fr;
-                gap: 24px;
-                margin-bottom: 60px;
-            }
+        .contact-list span {
+            width: 6.5rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
 
-            .project-item .project-image {
-                order: 1;
-            }
+        .contact-list a {
+            color: var(--fg);
+            text-decoration: none;
+            word-break: break-all; /* Garante boa exibição de e-mails longos em telas pequenas */
+            transition: var(--transition);
+        }
 
-            .project-item .project-info {
-                order: 2;
-            }
+        .contact-list a:hover {
+            color: var(--accent);
+        }
 
-            .project-image img {
-                height: 220px;
+        /* Animação suave ao trocar de aba */
+        @media (prefers-reduced-motion: no-preference) {
+            section:not([hidden]) {
+                animation: fadeIn 0.25s ease-out;
             }
-
-            .project-buttons {
-                flex-direction: column;
-            }
-
-            .project-buttons .btn {
-                width: 100%;
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(4px); }
+                to { opacity: 1; transform: translateY(0); }
             }
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 0 20px;
+        /* ==========================================================================
+           6. RESPONSIVIDADE & UX MOBILE
+           ========================================================================== */
+        @media (max-width: 640px) {
+            .wrap {
+                padding: 2rem 1.25rem 3rem;
             }
 
-            .about-section, .projects-section, .contact-section {
-                padding: 60px 0;
+            header {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 2rem;
             }
 
-            .section-title {
-                margin-bottom: 2.5rem;
-                font-size: 1.6rem;
+            .name {
+                font-size: 1.25rem;
             }
 
-            .btn {
+            nav {
                 width: 100%;
+                justify-content: center;
+                gap: 1.25rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .contact-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+
+            .contact-list span {
+                width: auto;
             }
         }
     </style>
 </head>
 <body>
+<div class="wrap">
+    <!-- Cabeçalho com Nome e Menu Centralizado -->
+    <header>
+        <div class="name">Wilder Miranda</div>
+        
+        <nav role="tablist" aria-label="Seções do site">
+            <button role="tab" id="tab-sobre" aria-selected="true" aria-controls="sobre">Sobre mim</button>
+            <button role="tab" id="tab-portfolio" aria-selected="false" aria-controls="portfolio">Portfólio</button>
+            <button role="tab" id="tab-contato" aria-selected="false" aria-controls="contato">Contato</button>
+        </nav>
+    </header>
 
     <main>
-        <!-- 1. HERÓI (Full Screen / Left Aligned) -->
-        <section class="hero" aria-label="Apresentação Principal">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-icon" aria-hidden="true">
-                        💻
-                    </div>
-                    <h1>Olá, meu nome é <span>Wilder Miranda</span></h1>
-                    <h2>Sou Analista de Dados</h2>
-                    <a href="#about" class="btn btn-primary js-smooth-scroll">Saiba mais sobre mim</a>
-                </div>
-            </div>
-            <!-- Seta centralizada na tela -->
-            <a href="#about" class="scroll-down js-smooth-scroll" aria-label="Rolar para a seção Sobre Mim">
-                <i class="fas fa-chevron-down" aria-hidden="true"></i>
-            </a>
+        <!-- 1. SEÇÃO SOBRE MIM -->
+        <section id="sobre" role="tabpanel" aria-labelledby="tab-sobre">
+            <img class="portrait" src="./me.jpg" alt="Foto de perfil de Wilder Miranda">
+            <h1>Analista de Dados</h1>
+            <p class="muted-text">Atuo com a coleta e análise de dados complexos para obter informações que orientem as decisões de forma estratégica e melhorar o desempenho do negócio.</p>
+            
+            <p><strong>→</strong> Excel e Power Point Avançado, experiência com consultas e análises SQL e criação de dashboards interativos com Streamlit.</p>
         </section>
 
-        <!-- 2. SOBRE MIM (Gradiente #FFFFFF -> #FBFCFE) -->
-        <section class="about-section" id="about" aria-label="Sobre Mim">
-            <div class="container">
-                <h2 class="section-title">Sobre Mim</h2>
-                <div class="about-grid">
-                    <div class="about-img-container">
-                        <img src="./me.jpg" alt="Foto de perfil de Wilder Miranda">
+        <!-- 2. SEÇÃO PORTFÓLIO -->
+        <section id="portfolio" role="tabpanel" aria-labelledby="tab-portfolio" hidden>
+            <ul class="portfolio">
+                <li>
+                    <img src="./contratos.png" alt="Visualização do Dashboard de Gestão de Contratos" loading="lazy">
+                    <h2>Gestão de Contratos</h2>
+                    <div class="tags">Excel • Power Query • Tabela Dinâmica</div>
+                    <p>Dashboard interativo projetado para explorar dados, cruzar informações estratégicas e extrair insights valiosos no próprio Excel.</p>
+                    <div class="portfolio-links">
+                        <a class="link-btn" href="https://www.youtube.com/watch?v=yniZXFbitWw&t=15s" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-youtube"></i> Assistir Vídeo
+                        </a>
                     </div>
-                    <div class="about-text">
-                        <p>Experiência como Analista com expertise no desenvolvimento de soluções que envolvem dados e automação de processos.</p>
-                        <p>Busco transformar dados complexos em soluções claras e acionáveis, unindo lógica estruturada, boas práticas e interfaces visuais eficientes para tomadas de decisão estratégicas.</p>
-                        <p><strong>→ Analytics & BI:</strong> Excel Avançado, Noções de SQL para análise de dados e criação de insights com Streamlit.</p>
+                </li>
+
+                <li>
+                    <img src="./sales-metrics.png" alt="Visualização do Dashboard de Vendas de Automóveis" loading="lazy">
+                    <h2>Dashboard de Vendas de Automóveis</h2>
+                    <div class="tags">Python • Streamlit • PostgreSQL • Plotly</div>
+                    <p>Projeto prático de análise de dados onde dados brutos armazenados em PostgreSQL foram transformados em um painel interativo dinâmico.</p>
+                    <div class="portfolio-links">
+                        <a class="link-btn" href="https://www.youtube.com/watch?v=Rnu03wLBQzU&t=46s" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-youtube"></i> Assistir Vídeo
+                        </a>
+                        <a class="link-btn" href="https://github.com/wildermiranda/SalesDashboard" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> Código Fonte
+                        </a>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </section>
 
-        <!-- 3. PROJETOS (Gradiente #FBFCFE -> #FFFFFF) -->
-        <section class="projects-section" id="projects" aria-label="Projetos Desenvolvidos">
-            <div class="container">
-                <h2 class="section-title">Projetos</h2>
-
-                <!-- Projeto 1 -->
-                <article class="project-item">
-                    <div class="project-image">
-                        <img src="./contratos.png" alt="Visualização do Dashboard de Gestão de Contratos">
-                    </div>
-                    <div class="project-info">
-                        <h3>Gestão de Contratos</h3>
-                        <p>Dashboard interativo com Tabela Dinâmica e Power Query, para quem gosta de explorar os dados, cruzar informações e tirar insights no próprio Excel.</p>
-                        <div class="project-buttons">
-                            <a href="https://www.youtube.com/watch?v=yniZXFbitWw&t=15s" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Ver vídeo do projeto Gestão de Contratos no YouTube (abre em nova aba)">Ver Mais</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Projeto 2 -->
-                <article class="project-item">
-                    <div class="project-image">
-                        <img src="./sales-metrics.png" alt="Visualização do Dashboard de Vendas de Automóveis">
-                    </div>
-                    <div class="project-info">
-                        <h3>Dashboard de Vendas de Automóveis</h3>
-                        <p>Projeto prático de análise de dados onde pude transformar dados brutos armazenados em um banco de dados PostgreSQL em insights visuais interativos com Streamlit e Plotly.</p>
-                        <div class="project-buttons">
-                            <a href="https://www.youtube.com/watch?v=Rnu03wLBQzU&t=46s" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Ver vídeo do Dashboard de Vendas no YouTube (abre em nova aba)">Ver Mais</a>
-                            <a href="https://github.com/wildermiranda/SalesDashboard" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Acessar código do projeto no GitHub (abre em nova aba)">Acessar Código</a>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- 4. CONTATO (#FFFFFF - MANTIDO SÓLIDO ANTES DO FOOTER) -->
-        <section class="contact-section" id="contact" aria-label="Contato">
-            <div class="container">
-                <div class="contact-content">
-                    <h2>Contato</h2>
-                    <p>Quer conversar sobre novos projetos ou oportunidades? Entre em contato!</p>
-                    <a href="mailto:contatowildermiranda@gmail.com" class="btn btn-primary" aria-label="Enviar um e-mail para Wilder Miranda">Enviar E-mail</a>
-                </div>
-            </div>
+        <!-- 3. SEÇÃO CONTATO -->
+        <section id="contato" role="tabpanel" aria-labelledby="tab-contato" hidden>
+            <h1>Vamos conversar?</h1>
+            <p class="muted-text">Sinta-se à vontade para entrar em contato.</p>
+            <ul class="contact-list">
+                <li>
+                    <span>E-mail</span>
+                    <a href="mailto:contatowildermiranda@gmail.com">contatowildermiranda@gmail.com</a>
+                </li>
+                <li>
+                    <span>LinkedIn</span>
+                    <a href="https://www.linkedin.com/in/wildermiranda" target="_blank" rel="noopener noreferrer">linkedin.com/in/wildermiranda</a>
+                </li>
+                <li>
+                    <span>GitHub</span>
+                    <a href="https://github.com/wildermiranda" target="_blank" rel="noopener noreferrer">github.com/wildermiranda</a>
+                </li>
+            </ul>
         </section>
     </main>
+</div>
 
-    <!-- 5. RODAPÉ (#FBFCFE - MANTIDO SÓLIDO COMO ESTAVA) -->
-    <footer>
-        <div class="container">
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/wildermiranda" target="_blank" rel="noopener noreferrer" aria-label="Perfil do LinkedIn de Wilder Miranda (abre em nova aba)">
-                    <i class="fab fa-linkedin" aria-hidden="true"></i>
-                </a>
-                <a href="https://github.com/wildermiranda" target="_blank" rel="noopener noreferrer" aria-label="Perfil do GitHub de Wilder Miranda (abre em nova aba)">
-                    <i class="fab fa-github" aria-hidden="true"></i>
-                </a>
-            </div>
-            <p class="copyright">&copy; 2026 - Desenvolvido por Wilder Miranda</p>
-        </div>
-    </footer>
+<!-- Lógica JavaScript (Apenas para Troca de Abas) -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('[role="tab"]');
+        const panels = document.querySelectorAll('[role="tabpanel"]');
 
-    <!-- Script para Rolagem Suave sem alterar a URL -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Se a URL já tiver o hash ao carregar a página, limpa a URL sem recarregar
-            if (window.location.hash) {
-                history.replaceState(null, document.title, window.location.pathname + window.location.search);
-            }
+        function showTab(id) {
+            tabs.forEach(t => t.setAttribute('aria-selected', t.getAttribute('aria-controls') === id));
+            panels.forEach(p => p.hidden = p.id !== id);
+        }
 
-            // Seleciona os links da primeira seção
-            const smoothLinks = document.querySelectorAll('.js-smooth-scroll');
+        tabs.forEach(t => t.addEventListener('click', () => {
+            const id = t.getAttribute('aria-controls');
+            showTab(id);
+            history.replaceState(null, '', '#' + id);
+        }));
 
-            smoothLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    const targetSection = document.getElementById('about');
-                    if (targetSection) {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+        // Ativa a aba inicial caso haja hash na URL (ex: #portfolio)
+        const initialHash = location.hash.slice(1);
+        if (['sobre', 'portfolio', 'contato'].includes(initialHash)) {
+            showTab(initialHash);
+        }
+    });
+</script>
 </body>
 </html>
