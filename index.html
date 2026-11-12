@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wilder Miranda | Analista de Dados</title>
     
-    <!-- Importação das Fontes: Inter (Títulos), IBM Plex Sans (Corpo) e JetBrains Mono (Links por extenso) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=Inter:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <!-- Ícones via FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,8 +23,8 @@
             --line: #2A2A2A;
             --accent: #4F90F7;
             
-            --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+            --font-heading: 'Bricolage Grotesque', sans-serif;
+            --font-body: 'Hanken Grotesk', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
             
             --transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
@@ -91,12 +90,45 @@
             margin-bottom: 3rem;
         }
 
-        /* Menu de Navegação Centralizado */
+        /* Menu de Navegação alinhado à extrema direita (desktop) */
         nav {
             display: flex;
-            gap: 1.5rem;
-            margin: 0 auto;
+            gap: 1.75rem;
+            margin-left: auto;
         }
+
+        /* Botão hambúrguer: oculto no desktop */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            width: 44px;
+            height: 44px;
+            background: transparent;
+            border: 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--fg);
+            transition: transform 0.3s ease, opacity 0.2s ease, background-color 0.2s ease;
+        }
+
+        .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+        .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
         nav button {
             background: none;
@@ -107,7 +139,6 @@
             color: var(--muted);
             cursor: pointer;
             padding: 0.4rem 0.2rem;
-            border-bottom: 2px solid transparent;
             transition: var(--transition);
             min-height: 44px; /* Área de toque recomendada para mobile */
             display: inline-flex;
@@ -140,7 +171,7 @@
             font-size: 2.1rem;
             line-height: 1.25;
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .portrait {
@@ -154,12 +185,40 @@
 
         p {
             font-size: 1rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             color: var(--fg);
         }
 
         .muted-text {
             color: var(--muted);
+        }
+
+        /* Botão de download do currículo: no hover o fundo assume a cor da borda e os dois se fundem */
+        .btn-download {
+            --btn-tone: #333333;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: 1rem;
+            min-height: 44px;
+            padding: 0.55rem 1.1rem;
+            border: 1px solid var(--btn-tone);
+            border-radius: 12px;
+            background: transparent;
+            color: var(--fg);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-download:hover {
+            background: var(--btn-tone);
+        }
+
+        .btn-download i {
+            font-size: 0.85rem;
         }
 
         /* ==========================================================================
@@ -289,9 +348,11 @@
             }
 
             header {
-                flex-direction: column;
-                align-items: center;
+                position: relative;
+                flex-wrap: nowrap;
+                justify-content: space-between;
                 gap: 1rem;
+                padding-bottom: 1.25rem;
                 margin-bottom: 2rem;
             }
 
@@ -299,10 +360,56 @@
                 font-size: 1.25rem;
             }
 
+            .menu-toggle {
+                display: inline-flex;
+            }
+
+            /* Menu suspenso em painel */
             nav {
+                position: absolute;
+                top: calc(100% + 0.75rem);
+                left: 0;
+                right: 0;
+                z-index: 20;
+                flex-direction: column;
+                gap: 0.25rem;
+                margin: 0;
+                padding: 0.5rem;
+                background: rgba(24, 24, 24, 0.96);
+                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(12px);
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-8px);
+                transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.22s;
+            }
+
+            nav.open {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                transition-delay: 0s;
+            }
+
+            nav button {
                 width: 100%;
-                justify-content: center;
-                gap: 1.25rem;
+                justify-content: flex-start;
+                padding: 0.6rem 0.9rem;
+                border-bottom: 0;
+                border-radius: 10px;
+                font-size: 1.05rem;
+            }
+
+            nav button:hover {
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            nav button[aria-selected="true"] {
+                color: var(--accent);
+                background: rgba(79, 144, 247, 0.12);
             }
 
             h1 {
@@ -327,7 +434,11 @@
     <header>
         <div class="name">Wilder Miranda</div>
         
-        <nav role="tablist" aria-label="Seções do site">
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav id="menu" role="tablist" aria-label="Seções do site">
             <button role="tab" id="tab-sobre" aria-selected="true" aria-controls="sobre">Sobre mim</button>
             <button role="tab" id="tab-portfolio" aria-selected="false" aria-controls="portfolio">Portfólio</button>
             <button role="tab" id="tab-contato" aria-selected="false" aria-controls="contato">Contato</button>
@@ -339,9 +450,13 @@
         <section id="sobre" role="tabpanel" aria-labelledby="tab-sobre">
             <img class="portrait" src="./me.jpg" alt="Foto de perfil de Wilder Miranda">
             <h1>Analista de Dados</h1>
-            <p class="muted-text">Atuo na coleta e análise de dados complexos, transformando informações em estratégias que otimizam a tomada de decisão e melhoram os resultados do negócio.</p>
-            
-            <p><strong>→</strong> Excel e Power Point Avançado, experiência com consultas e análises SQL e criação de dashboards interativos com Streamlit.</p>
+            <p>Analista com experiência em logística e na área comercial do Grupo GPS, empresa especializada em serviços terceirizados. Como Analista Comercial, desenvolvi uma ferramenta de automação em Excel que reduziu em 80% o tempo de elaboração de propostas. Antes, como Analista de Projetos, trabalhei com mapeamento de processos (BPMN), Cronoanálise e indicadores para áreas técnicas e gestores.</p>
+            <p>Atualmente direciono essa base para a análise de dados, resolvendo problemas de negócio com SQL, Python e Power BI. Meu projeto mais recente é um dashboard analítico de vendas com PostgreSQL e Streamlit, que você pode conferir no portfólio.</p>
+
+            <!-- Download do currículo -->
+            <a class="btn-download" href="./Wilder Miranda.pdf" download="Wilder Miranda.pdf">
+                <i class="fa-solid fa-download" aria-hidden="true"></i> Baixar currículo
+            </a>
         </section>
 
         <!-- 2. SEÇÃO PORTFÓLIO -->
@@ -379,7 +494,7 @@
         <!-- 3. SEÇÃO CONTATO -->
         <section id="contato" role="tabpanel" aria-labelledby="tab-contato" hidden>
             <h1>Vamos conversar?</h1>
-            <p class="muted-text">Sinta-se à vontade para entrar em contato.</p>
+            <p class="muted-text">Fique à vontade para entrar em contato.</p>
             <ul class="contact-list">
                 <li>
                     <span>E-mail</span>
@@ -404,6 +519,28 @@
         const tabs = document.querySelectorAll('[role="tab"]');
         const panels = document.querySelectorAll('[role="tabpanel"]');
 
+        const toggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+
+        function setMenu(open) {
+            menu.classList.toggle('open', open);
+            toggle.setAttribute('aria-expanded', open);
+            toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        }
+
+        toggle.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+
+        // Fecha ao clicar fora ou ao pressionar Esc
+        document.addEventListener('click', e => {
+            if (!menu.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); toggle.focus(); }
+        });
+
+        // Fecha ao voltar para a tela larga
+        window.matchMedia('(min-width: 641px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+
         function showTab(id) {
             tabs.forEach(t => t.setAttribute('aria-selected', t.getAttribute('aria-controls') === id));
             panels.forEach(p => p.hidden = p.id !== id);
@@ -412,6 +549,7 @@
         tabs.forEach(t => t.addEventListener('click', () => {
             const id = t.getAttribute('aria-controls');
             showTab(id);
+            setMenu(false);
             history.replaceState(null, '', '#' + id);
         }));
 
