@@ -288,11 +288,13 @@
 
         .timeline > li::before {
             content: "";
+            box-sizing: border-box; /* pseudo-elementos não herdam o reset global */
             position: absolute;
-            left: calc(-1.75rem - 5px);
-            top: 0.55rem;
-            width: 9px;
-            height: 9px;
+            left: calc(-1.75rem - 0.5px); /* centro exato da linha de 1px */
+            top: 0.85rem;                 /* centro da primeira linha do título */
+            transform: translate(-50%, -50%);
+            width: 11px;
+            height: 11px;
             border-radius: 50%;
             background: var(--bg);
             border: 2px solid var(--muted);
