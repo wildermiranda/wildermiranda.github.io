@@ -221,6 +221,134 @@
             font-size: 0.85rem;
         }
 
+        /* Galeria "Na operação": fotos levemente inclinadas e sobrepostas */
+        .gallery {
+            display: flex;
+            justify-content: center;
+            margin: 2.5rem 0 0.5rem;
+            padding: 1.25rem 0;
+        }
+
+        .gallery figure {
+            --r: 0deg;
+            --y: 0px;
+            position: relative;
+            width: clamp(7rem, 23vw, 10.25rem);
+            aspect-ratio: 3 / 4;
+            margin-left: -1.25rem;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.8);
+            transform: translateY(var(--y)) rotate(var(--r));
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .gallery figure:first-child { margin-left: 0; }
+        .gallery figure:nth-child(1) { --r: -4deg; --y: 0px; }
+        .gallery figure:nth-child(2) { --r: 3deg;  --y: 14px; }
+        .gallery figure:nth-child(3) { --r: -2deg; --y: -6px; }
+        .gallery figure:nth-child(4) { --r: 4deg;  --y: 8px; }
+
+        .gallery figure:hover {
+            z-index: 5;
+            transform: translateY(calc(var(--y) - 8px)) rotate(0deg) scale(1.05);
+            box-shadow: 0 24px 40px -12px rgba(0, 0, 0, 0.9);
+        }
+
+        .gallery img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* Linha do tempo da experiência */
+        .timeline {
+            list-style: none;
+            position: relative;
+            margin-top: 2rem;
+            padding-left: 1.75rem;
+            border-left: 1px solid var(--line);
+        }
+
+        .timeline > li {
+            position: relative;
+            padding-bottom: 2.5rem;
+        }
+
+        .timeline > li::before {
+            content: "";
+            position: absolute;
+            left: calc(-1.75rem - 5px);
+            top: 0.55rem;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--muted);
+        }
+
+        .timeline > li:first-child::before {
+            background: var(--fg);
+            border-color: var(--fg);
+        }
+
+        .role h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .role-meta {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin: 0.15rem 0 0.6rem;
+        }
+
+        .role-tools {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.9rem;
+        }
+
+        .role-list {
+            list-style: none;
+        }
+
+        .role-list li {
+            position: relative;
+            padding-left: 1.1rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.65;
+        }
+
+        .role-list li::before {
+            content: "–";
+            position: absolute;
+            left: 0;
+            color: var(--muted);
+        }
+
+        .exp-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            color: var(--muted);
+            margin-top: 0.5rem;
+        }
+
         /* ==========================================================================
            4. SEÇÃO PORTFÓLIO
            ========================================================================== */
@@ -416,6 +544,23 @@
                 font-size: 1.75rem;
             }
 
+            /* Galeria em grade 2x2 no mobile */
+            .gallery {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 0.75rem 0.25rem;
+            }
+
+            .gallery figure,
+            .gallery figure:first-child {
+                width: 100%;
+                margin-left: 0;
+                aspect-ratio: 4 / 5;
+            }
+
+            .gallery figure:nth-child(n) { --y: 0px; }
+
             .contact-list li {
                 flex-direction: column;
                 align-items: flex-start;
@@ -440,6 +585,7 @@
 
         <nav id="menu" role="tablist" aria-label="Seções do site">
             <button role="tab" id="tab-sobre" aria-selected="true" aria-controls="sobre">Sobre mim</button>
+            <button role="tab" id="tab-experiencia" aria-selected="false" aria-controls="experiencia">Experiência</button>
             <button role="tab" id="tab-portfolio" aria-selected="false" aria-controls="portfolio">Portfólio</button>
             <button role="tab" id="tab-contato" aria-selected="false" aria-controls="contato">Contato</button>
         </nav>
@@ -450,8 +596,8 @@
         <section id="sobre" role="tabpanel" aria-labelledby="tab-sobre">
             <img class="portrait" src="./me.jpg" alt="Foto de perfil de Wilder Miranda">
             <h1>Analista de Dados</h1>
-            <p>Analista com experiência em logística e na área comercial do Grupo GPS, empresa especializada em serviços terceirizados. Como Analista Comercial, desenvolvi uma ferramenta de automação em Excel que reduziu em 80% o tempo de elaboração de propostas. Antes, como Analista de Projetos, trabalhei com mapeamento de processos (BPMN), Cronoanálise e indicadores para áreas técnicas e gestores.</p>
-            <p>Atualmente direciono essa base para a análise de dados, resolvendo problemas de negócio com SQL, Python e Power BI. Meu projeto mais recente é um dashboard analítico de vendas com PostgreSQL e Streamlit, que você pode conferir no portfólio.</p>
+            <p>Analista com experiência em logística e na área comercial do Grupo GPS, empresa especializada em serviços terceirizados. Como Analista Comercial, desenvolvi uma ferramenta de automação em <b>Excel</b> que reduziu em 80% o tempo de elaboração de propostas. Antes, como Analista de Projetos, trabalhei com mapeamento de processos (BPMN), Cronoanálise e indicadores para áreas técnicas e gestores.</p>
+            <p>Atualmente direciono essa base para a análise de dados, resolvendo problemas de negócio com <b>SQL</b>, <b>Python</b> e <b>Power BI</b>. Meu projeto mais recente é um Dashboard de Vendas de Automóveis com <b>PostgreSQL</b> e <b>Streamlit</b>, que você pode conferir no portfólio.</p>
 
             <!-- Download do currículo -->
             <a class="btn-download" href="./Wilder Miranda.pdf" download="Wilder Miranda.pdf">
@@ -459,7 +605,48 @@
             </a>
         </section>
 
-        <!-- 2. SEÇÃO PORTFÓLIO -->
+        <!-- 2. SEÇÃO EXPERIÊNCIA -->
+        <section id="experiencia" role="tabpanel" aria-labelledby="tab-experiencia" hidden>
+            <h1>Experiência</h1>
+
+            <ol class="timeline">
+                <li class="role">
+                    <h2>Analista Comercial</h2>
+                    <div class="role-meta">Grupo GPS • Julho 2025 – Setembro 2026</div>
+                    <div class="role-tools">Excel • PowerPoint • Orçamentação</div>
+                    <ul class="role-list">
+                        <li>Desenvolvi uma ferramenta de automação orçamentária em Excel com preenchimento dinâmico, que centraliza a base de custos de mão de obra e equipamentos e distribui as informações para as demais frentes da proposta, reduzindo em <b>80%</b> o tempo de elaboração de propostas comerciais.</li>
+                        <li>Criei uma solução em Excel que centraliza o status de todos os contratos da companhia, permitindo ao Diretor acompanhar a acuracidade dos contratos regularizados e atuar sobre pendências (sem cláusula de reajuste, sem assinatura ou com cliente inexistente).</li>
+                        <li>Elaborei minutas contratuais e apresentações comerciais em PowerPoint, traduzindo requisitos técnicos em documentos claros para clientes e parceiros.</li>
+                        <li>Alinhei as demandas comerciais com a equipe operacional para garantir a execução dos serviços conforme o proposto.</li>
+                    </ul>
+                </li>
+
+                <li class="role">
+                    <h2>Analista de Projetos Júnior</h2>
+                    <div class="role-meta">Grupo GPS • Novembro 2024 – Julho 2025</div>
+                    <div class="role-tools">BPMN • Cronoanálise • Excel</div>
+                    <ul class="role-list">
+                        <li>Mapeei e diagnostiquei processos operacionais da área de logística, identificando gargalos e oportunidades de aumento do rendimento operacional.</li>
+                        <li>Padronizei processos críticos com fluxogramas em BPMN e POPs (Procedimentos Operacionais Padrão), garantindo retenção de conhecimento e conformidade operacional.</li>
+                        <li>Conduzi estudos de Tempos e Movimentos (Cronoanálise) para definir KPIs de produtividade, otimizar postos de trabalho e dimensionar headcount.</li>
+                        <li>Consolidei indicadores em Excel, transformando dados brutos em informações para apoiar a tomada de decisão gerencial.</li>
+                        <li>Levantei requisitos com a equipe operacional, traduzindo necessidades em soluções técnicas.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <!-- Galeria da vivência na operação: troque os 4 src abaixo pelas suas fotos (ex.: ./operacao-1.jpg) e ajuste os alt -->
+            <div class="gallery">
+                <figure><img src="./1.jpg" alt="Foto 1 da vivência na operação" width="600" height="800" loading="lazy"></figure>
+                <figure><img src="./2.jpg" alt="Foto 2 da vivência na operação" width="600" height="800" loading="lazy"></figure>
+                <figure><img src="./3.jpg" alt="Foto 3 da vivência na operação" width="600" height="800" loading="lazy"></figure>
+                <figure><img src="./4.jpg" alt="Foto 4 da vivência na operação" width="600" height="800" loading="lazy"></figure>
+            </div>
+            <div class="gallery-caption"><span></span><span>Grupo GPS</span></div>
+        </section>
+
+        <!-- 3. SEÇÃO PORTFÓLIO -->
         <section id="portfolio" role="tabpanel" aria-labelledby="tab-portfolio" hidden>
             <ul class="portfolio">
                 <li>
@@ -491,7 +678,7 @@
             </ul>
         </section>
 
-        <!-- 3. SEÇÃO CONTATO -->
+        <!-- 4. SEÇÃO CONTATO -->
         <section id="contato" role="tabpanel" aria-labelledby="tab-contato" hidden>
             <h1>Vamos conversar?</h1>
             <p class="muted-text">Fique à vontade para entrar em contato.</p>
@@ -555,7 +742,7 @@
 
         // Ativa a aba inicial caso haja hash na URL (ex: #portfolio)
         const initialHash = location.hash.slice(1);
-        if (['sobre', 'portfolio', 'contato'].includes(initialHash)) {
+        if (['sobre', 'experiencia', 'portfolio', 'contato'].includes(initialHash)) {
             showTab(initialHash);
         }
     });
