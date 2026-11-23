@@ -2,283 +2,193 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Wilder Miranda, Analista de Dados. Portfólio com projetos em SQL, Python, Power BI e Excel.">
     <title>Wilder Miranda | Analista de Dados</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <!-- Ícones via FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         /* ==========================================================================
-           1. VARIÁVEIS DE COR E TIPOGRAFIA (EXCLUSIVO DARK MODE)
+           1. TOKENS
+           Paleta única, uma família tipográfica (Geist), dois pesos principais.
            ========================================================================== */
         :root {
-            --bg: #111111;
-            --fg: #EEEEEE;
-            --muted: #A0A0A0;
-            --line: #2A2A2A;
-            --accent: #4F90F7;
-            
-            --font-heading: "Geist", sans-serif;
-            --font-body: "Geist", sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-            
-            --transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+            color-scheme: light;
+
+            /* Cores */
+            --color-bg: #ffffff;
+            --color-heading: #111111;
+            --color-text: #555555;
+            --color-muted: #767676;
+            --color-line: #e5e5e5;
+            --color-chip-bg: #f6f6f6;
+            --color-chip-bg-hover: #ececec;
+            --color-chip-text: #949394;
+            --color-underline: #c8c8c8;
+            --color-outline: rgba(128, 128, 128, 0.2);
+
+            /* Tipografia */
+            --font: "Geist", sans-serif;
+            --weight-regular: 400;
+            --weight-medium: 500;
+            --weight-semibold: 600;
+            --weight-bold: 700;
+
+            /* Espaço e forma */
+            --page-width: 40rem;
+            --label-width: 10rem;      /* coluna esquerda: etapas e rótulos */
+            --column-gap: 1.5rem;
+            --section-gap: 4rem;
+            --radius: 10px;
+            --radius-photo: 18px;
+
+            /* Sombras da galeria */
+            --shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.35);
+            --shadow-hover: 0 24px 40px -12px rgba(0, 0, 0, 0.45);
         }
 
-        /* Reset e Base */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        /* ==========================================================================
+           2. BASE
+           ========================================================================== */
+        *, *::before, *::after { box-sizing: border-box; }
+        * { margin: 0; padding: 0; }
 
         html {
             font-size: 16px;
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            overflow-x: hidden;
         }
 
         body {
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-body);
-            line-height: 1.7;
-            min-height: 100vh;
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font);
+            font-size: 0.92rem;
+            font-weight: var(--weight-regular);
+            line-height: 1.65;
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            overflow-x: hidden;
+            overflow-wrap: break-word;
         }
 
-        .wrap {
-            max-width: 42rem;
-            margin: 0 auto;
-            padding: 3rem 1.5rem 4rem;
+        ul, ol { list-style: none; }
+
+        img { display: block; max-width: 100%; }
+
+        [hidden] { display: none !important; }
+
+        b { font-weight: var(--weight-medium); color: var(--color-heading); }
+
+        a {
+            color: var(--color-heading);
+            text-decoration: underline;
+            text-decoration-color: var(--color-underline);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.2s ease, background-color 0.2s ease;
+            -webkit-tap-highlight-color: rgba(17, 17, 17, 0.08);
         }
 
-        /* Títulos com a fonte Inter */
-        h1, h2, h3, .name {
-            font-family: var(--font-heading);
-            color: var(--fg);
-            letter-spacing: -0.02em;
-        }
-
-        .name {
-            font-size: 1.15rem;
-            font-weight: 700;
-        }
-
-        /* Links por extenso usam a fonte JetBrains Mono */
-        .mono-link, 
-        .contact-list a {
-            font-family: var(--font-mono);
-            font-size: 0.9em;
-        }
-
-        /* ==========================================================================
-           2. CABEÇALHO E MENU CENTRALIZADO
-           ========================================================================== */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--line);
-            margin-bottom: 3rem;
-        }
-
-        /* Menu de Navegação alinhado à extrema direita (desktop) */
-        nav {
-            display: flex;
-            gap: 1.75rem;
-            margin-left: auto;
-        }
-
-        /* Botão hambúrguer: oculto no desktop */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 4px;
-            width: 44px;
-            height: 44px;
-            background: transparent;
-            border: 0;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .menu-toggle:hover {
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 18px;
-            height: 2px;
-            border-radius: 2px;
-            background: var(--fg);
-            transition: transform 0.3s ease, opacity 0.2s ease, background-color 0.2s ease;
-        }
-
-        .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-        .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-        .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-        nav button {
-            background: none;
-            border: 0;
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--muted);
-            cursor: pointer;
-            padding: 0.4rem 0.2rem;
-            transition: var(--transition);
-            min-height: 44px; /* Área de toque recomendada para mobile */
-            display: inline-flex;
-            align-items: center;
-        }
-
-        nav button:hover {
-            color: var(--fg);
-            font-weight: 600;
-        }
-
-        nav button[aria-selected="true"] {
-            color: var(--fg);
-            font-weight: 600;
-        }
+        a:hover { text-decoration-color: currentColor; }
 
         :focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-        }
-
-        section[hidden] {
-            display: none;
+            outline: 2px solid var(--color-heading);
+            outline-offset: 3px;
+            border-radius: 4px;
         }
 
         /* ==========================================================================
-           3. SEÇÃO SOBRE MIM
+           3. LAYOUT DA PÁGINA
            ========================================================================== */
-        h1 {
-            font-size: 2.1rem;
-            line-height: 1.25;
-            font-weight: 700;
-            margin-bottom: 1rem;
+        .page {
+            max-width: var(--page-width);
+            margin: 0 auto;
+            padding: 5rem 1.5rem calc(6rem + env(safe-area-inset-bottom, 0px));
         }
 
-        .portrait {
-            display: block;
-            width: 13rem;
-            height: 15rem;
+        .section {
+            margin-top: var(--section-gap);
+            scroll-margin-top: 2rem;
+        }
+
+        .section__title {
+            margin-bottom: 1.25rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.3;
+            color: var(--color-heading);
+        }
+
+        .prose p + p { margin-top: 1rem; }
+
+        /* ==========================================================================
+           4. APRESENTAÇÃO
+           ========================================================================== */
+        .intro {
+            display: flex;
+            align-items: center;
+            gap: var(--column-gap);
+        }
+
+        .intro__photo {
+            flex-shrink: 0;
+            width: 8.5rem;
+            height: 8.5rem;
             object-fit: cover;
-            border-radius: 10%;
-            margin-bottom: 1.75rem;
+            object-position: center top;
+            border-radius: 50%;
+            outline: 1px solid var(--color-outline);
+            outline-offset: -1px;
         }
 
-        p {
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            color: var(--fg);
+        .intro__name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            color: var(--color-heading);
         }
 
-        .muted-text {
-            color: var(--muted);
+        .intro__role {
+            font-size: 1rem;
+            line-height: 1.4;
         }
 
-        /* Botão de download do currículo: no hover o fundo assume a cor da borda e os dois se fundem */
-        .btn-download {
-            --btn-tone: #333333;
+        .chip {
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            margin-top: 1rem;
-            min-height: 44px;
-            padding: 0.55rem 1.1rem;
-            border: 1px solid var(--btn-tone);
-            border-radius: 12px;
-            background: transparent;
-            color: var(--fg);
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 600;
+            min-height: 2.5rem;
+            margin-top: 0.75rem;
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            background: var(--color-chip-bg);
+            color: var(--color-chip-text);
+            font-weight: var(--weight-medium);
             text-decoration: none;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
-        .btn-download:hover {
-            background: var(--btn-tone);
+        .chip:hover {
+            background: var(--color-chip-bg-hover);
+            color: var(--color-heading);
         }
 
-        .btn-download i {
-            font-size: 0.85rem;
-        }
-
-        /* Galeria "Na operação": fotos levemente inclinadas e sobrepostas */
-        .gallery {
-            display: flex;
-            justify-content: center;
-            margin: 2.5rem 0 0.5rem;
-            padding: 1.25rem 0;
-        }
-
-        .gallery figure {
-            --r: 0deg;
-            --y: 0px;
-            position: relative;
-            width: clamp(7rem, 23vw, 10.25rem);
-            aspect-ratio: 3 / 4;
-            margin-left: -1.25rem;
-            border-radius: 18px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.8);
-            transform: translateY(var(--y)) rotate(var(--r));
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-
-        .gallery figure:first-child { margin-left: 0; }
-        .gallery figure:nth-child(1) { --r: -4deg; --y: 0px; }
-        .gallery figure:nth-child(2) { --r: 3deg;  --y: 14px; }
-        .gallery figure:nth-child(3) { --r: -2deg; --y: -6px; }
-        .gallery figure:nth-child(4) { --r: 4deg;  --y: 8px; }
-
-        .gallery figure:hover {
-            z-index: 5;
-            transform: translateY(calc(var(--y) - 8px)) rotate(0deg) scale(1.05);
-            box-shadow: 0 24px 40px -12px rgba(0, 0, 0, 0.9);
-        }
-
-        .gallery img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .gallery-caption {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.85rem;
-            color: var(--muted);
-        }
-
-        /* Linha do tempo da experiência */
+        /* ==========================================================================
+           5. EXPERIÊNCIA (Linha do tempo adaptada do arquivo_1)
+           ========================================================================== */
         .timeline {
             list-style: none;
             position: relative;
-            margin-top: 2rem;
+            margin-top: 1.75rem;
             padding-left: 1.75rem;
-            border-left: 1px solid var(--line);
+            border-left: 1px solid var(--color-line);
         }
 
         .timeline > li {
@@ -286,338 +196,481 @@
             padding-bottom: 2.5rem;
         }
 
+        .timeline > li:last-child {
+            padding-bottom: 0.5rem;
+        }
+
         .timeline > li::before {
             content: "";
-            box-sizing: border-box; /* pseudo-elementos não herdam o reset global */
+            box-sizing: border-box;
             position: absolute;
-            left: calc(-1.75rem - 0.5px); /* centro exato da linha de 1px */
-            top: 0.85rem;                 /* centro da primeira linha do título */
+            left: calc(-1.75rem - 0.5px);
+            top: 0.7rem;
             transform: translate(-50%, -50%);
             width: 11px;
             height: 11px;
             border-radius: 50%;
-            background: var(--bg);
-            border: 2px solid var(--muted);
+            background: var(--color-bg);
+            border: 2px solid var(--color-underline);
         }
 
         .timeline > li:first-child::before {
-            background: var(--fg);
-            border-color: var(--fg);
+            background: var(--color-heading);
+            border-color: var(--color-heading);
         }
 
-        .role h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            line-height: 1.3;
+        .role__title {
+            font-size: 1.0625rem;
+            font-weight: var(--weight-bold);
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+            color: var(--color-heading);
         }
 
-        .role-meta {
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin: 0.15rem 0 0.6rem;
+        .role__meta {
+            font-size: 0.85rem;
+            color: var(--color-muted);
+            margin: 0.15rem 0 0.45rem;
+            font-variant-numeric: tabular-nums;
         }
 
-        .role-tools {
-            color: var(--accent);
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 0.9rem;
+        .role__tools {
+            font-size: 0.85rem;
+            font-weight: var(--weight-semibold);
+            color: var(--color-heading);
+            margin-bottom: 0.85rem;
         }
 
-        .role-list {
+        .role__list {
             list-style: none;
         }
 
-        .role-list li {
-            font-size: 0.95rem;
+        .role__list li {
             position: relative;
             padding-left: 1.1rem;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.65rem;
             line-height: 1.65;
         }
 
-        .role-list li::before {
+        .role__list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .role__list li::before {
             content: "–";
             position: absolute;
             left: 0;
-            color: var(--muted);
-        }
-
-        .exp-subtitle {
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0;
-            color: var(--muted);
-            margin-top: 0.5rem;
+            color: var(--color-muted);
         }
 
         /* ==========================================================================
-           4. SEÇÃO PORTFÓLIO
+           5.1 LINHAS DE CONTEÚDO (etapas dos projetos)
+           Rótulo à esquerda, conteúdo à direita.
            ========================================================================== */
-        .portfolio {
-            list-style: none;
+        .entries { display: grid; gap: 2rem; }
+
+        .entry {
+            display: grid;
+            grid-template-columns: var(--label-width) minmax(0, 2fr);
+            column-gap: var(--column-gap);
+            row-gap: 1.25rem;
         }
 
-        .portfolio li {
-            padding: 2rem 0;
-            border-top: 1px solid var(--line);
+        .entry__label { font-variant-numeric: tabular-nums; }
+
+        .entries--compact { gap: 1.25rem; }
+
+        .list { margin-top: 0.75rem; }
+        .list li + li { margin-top: 0.6rem; }
+
+        /* ==========================================================================
+           5.2 PROJETOS: BOXES VERTICAIS NA PÁGINA INICIAL
+           ========================================================================== */
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
 
-        .portfolio li:first-child {
-            border-top: 0;
-            padding-top: 0;
-        }
+        .cards > li { display: flex; }
 
-        .portfolio h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-        }
-
-        .portfolio img {
-            display: block;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            margin-bottom: 1.25rem;
-            transition: transform 0.25s ease;
-        }
-
-        .portfolio li:hover img {
-            transform: scale(1.01);
-        }
-
-        .portfolio .tags {
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .portfolio-links {
+        .card {
+            flex: 1;
             display: flex;
-            gap: 1.25rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding: 1.2rem 1.3rem;
+            border-radius: 16px;
+            background: var(--color-chip-bg);
+            color: var(--color-text);
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            -webkit-tap-highlight-color: rgba(17, 17, 17, 0.06);
         }
 
-        /* Links de Projetos com JetBrains Mono para URLs por extenso */
-        a.link-btn {
+        .card:hover,
+        .card:active { background: var(--color-chip-bg-hover); }
+        .card:focus-visible { border-radius: 16px; }
+
+        .card__body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .card__title {
+            font-size: 1rem;
+            font-weight: var(--weight-semibold);
+            line-height: 1.4;
+            color: var(--color-heading);
+        }
+
+        .card__cta {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--fg);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            border-bottom: 1px solid var(--fg);
-            padding-bottom: 2px;
-            transition: var(--transition);
+            min-height: 2.25rem;
+            margin-top: 0.35rem;
+            font-weight: var(--weight-medium);
+            color: var(--color-heading);
         }
 
-        a.link-btn:hover {
-            color: var(--accent);
+        .card:hover .card__cta {
+            text-decoration: underline;
+            text-underline-offset: 3px;
         }
 
         /* ==========================================================================
-           5. SEÇÃO CONTATO
+           5.3 PÁGINA DO PROJETO
            ========================================================================== */
-        .contact-list {
-            list-style: none;
-            margin-top: 2rem;
-        }
-
-        .contact-list li {
-            display: flex;
+        .back {
+            display: inline-flex;
             align-items: center;
-            gap: 1.5rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--line);
+            min-height: 2.75rem;
+            padding-right: 0.5rem;
+            color: var(--color-text);
         }
 
-        .contact-list li:last-child {
-            border: none;
+        .case__title:focus { outline: none; }
+
+        .case__head { margin-top: 1.75rem; }
+
+        .case__title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            color: var(--color-heading);
         }
 
-        .contact-list span {
-            width: 6.5rem;
-            color: var(--muted);
-            font-size: 0.9rem;
-            flex-shrink: 0;
+        .case__lead {
+            margin-top: 1rem;
+            font-size: 1rem;
+            line-height: 1.55;
         }
 
-        .contact-list a {
-            color: var(--fg);
-            text-decoration: none;
-            word-break: break-all; /* Garante boa exibição de e-mails longos em telas pequenas */
-            transition: var(--transition);
+        .case__media {
+            margin-top: 2rem;
+            padding: 0.625rem;
+            border-radius: 16px;
+            background: var(--color-chip-bg);
+            border: 1px solid var(--color-outline);
         }
 
-        .contact-list a:hover {
-            color: var(--accent);
-        }
-
-        /* Animação suave ao trocar de aba */
-        @media (prefers-reduced-motion: no-preference) {
-            section:not([hidden]) {
-                animation: fadeIn 0.25s ease-out;
-            }
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(4px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
+        .case__cover {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 26rem;
+            object-fit: contain;
+            background: var(--color-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--color-outline);
         }
 
         /* ==========================================================================
-           6. RESPONSIVIDADE & UX MOBILE
+           6. GALERIA "NA OPERAÇÃO"
+           Fotos levemente inclinadas e sobrepostas.
            ========================================================================== */
-        @media (max-width: 640px) {
-            .wrap {
-                padding: 2rem 1.25rem 3rem;
-            }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            margin: 2.5rem 0 0.5rem;
+            padding: 1.25rem 0;
+        }
 
-            header {
-                position: relative;
-                flex-wrap: nowrap;
-                justify-content: space-between;
-                gap: 1rem;
-                padding-bottom: 1.25rem;
-                margin-bottom: 2rem;
-            }
+        .gallery__item {
+            --rotate: 0deg;
+            --lift: 0px;
+            position: relative;
+            width: clamp(7rem, 23vw, 10rem);
+            aspect-ratio: 3 / 4;
+            margin-left: -1.25rem;
+            overflow: hidden;
+            border: 1px solid var(--color-outline);
+            border-radius: var(--radius-photo);
+            box-shadow: var(--shadow);
+            transform: translateY(var(--lift)) rotate(var(--rotate));
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
 
-            .name {
-                font-size: 1.25rem;
-            }
+        .gallery__item:first-child { margin-left: 0; }
+        .gallery__item:nth-child(1) { --rotate: -4deg; --lift: 0px; }
+        .gallery__item:nth-child(2) { --rotate: 3deg;  --lift: 14px; }
+        .gallery__item:nth-child(3) { --rotate: -2deg; --lift: -6px; }
+        .gallery__item:nth-child(4) { --rotate: 4deg;  --lift: 8px; }
 
-            .menu-toggle {
-                display: inline-flex;
+        @media (hover: hover) {
+            .gallery__item:hover {
+                z-index: 5;
+                transform: translateY(calc(var(--lift) - 8px)) rotate(0deg) scale(1.05);
+                box-shadow: var(--shadow-hover);
             }
+        }
 
-            /* Menu suspenso em painel */
-            nav {
-                position: absolute;
-                top: calc(100% + 0.75rem);
-                left: 0;
-                right: 0;
-                z-index: 20;
-                flex-direction: column;
-                gap: 0.25rem;
-                margin: 0;
-                padding: 0.5rem;
-                background: rgba(24, 24, 24, 0.96);
-                -webkit-backdrop-filter: blur(12px);
-                backdrop-filter: blur(12px);
-                border: 1px solid var(--line);
-                border-radius: 16px;
-                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-8px);
-                transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.22s;
-            }
+        .gallery__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-            nav.open {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-                transition-delay: 0s;
-            }
+        .gallery__caption {
+            font-size: 0.85rem;
+            text-align: right;
+            color: var(--color-muted);
+        }
 
-            nav button {
-                width: 100%;
-                justify-content: flex-start;
-                padding: 0.6rem 0.9rem;
-                border-bottom: 0;
-                border-radius: 10px;
+        /* ==========================================================================
+           7. CONTATO E FICHAS (linhas rótulo + valor)
+           ========================================================================== */
+        .contact__intro { margin-bottom: 1.25rem; }
+
+        .rows { display: grid; gap: 0.75rem; }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr;
+            row-gap: 0.1rem;
+            padding-bottom: 0.65rem;
+            border-bottom: 1px solid var(--color-line);
+        }
+
+        .row:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .row > span:first-child,
+        .row > dt {
+            font-size: 0.8rem;
+            color: var(--color-muted);
+        }
+
+        .row dd { color: var(--color-heading); }
+        .row a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 2.75rem;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        /* ==========================================================================
+           8. RESPONSIVIDADE MOBILE & MOVIMENTO
+           ========================================================================== */
+        @media (max-width: 600px) {
+            body {
                 font-size: 0.95rem;
+                line-height: 1.65;
             }
 
-            nav button:hover {
-                background: rgba(255, 255, 255, 0.05);
+            .page {
+                padding: 2.5rem 1.15rem calc(4.5rem + env(safe-area-inset-bottom, 0px));
             }
 
-            nav button[aria-selected="true"] {
-                color: var(--accent);
-                background: rgba(79, 144, 247, 0.12);
+            .section {
+                margin-top: 3rem;
+                scroll-margin-top: 1.25rem;
             }
 
-            h1 {
-                font-size: 1.75rem;
+            .section__title {
+                font-size: 1.18rem;
+                margin-bottom: 1rem;
             }
 
-            /* Galeria em grade 2x2 no mobile */
-            .gallery {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-                padding: 0.75rem 0.25rem;
-            }
-
-            .gallery figure,
-            .gallery figure:first-child {
-                width: 100%;
-                margin-left: 0;
-                aspect-ratio: 4 / 5;
-            }
-
-            .gallery figure:nth-child(n) { --y: 0px; }
-
-            .contact-list li {
+            /* Cabeçalho em coluna centralizada ou compacta no celular */
+            .intro {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 0.25rem;
+                gap: 1.1rem;
             }
 
-            .contact-list span {
-                width: auto;
+            .intro__photo {
+                width: 6.25rem;
+                height: 6.25rem;
             }
+
+            .intro__name {
+                font-size: 1.45rem;
+            }
+
+            .intro__role {
+                font-size: 0.98rem;
+            }
+
+            .chip {
+                min-height: 2.75rem;
+                padding: 0.5rem 1.1rem;
+            }
+
+            /* Linha do tempo com respiro adequado em telas estreitas */
+            .timeline {
+                margin-top: 1.35rem;
+                padding-left: 1.35rem;
+            }
+
+            .timeline > li {
+                padding-bottom: 2rem;
+            }
+
+            .timeline > li::before {
+                left: calc(-1.35rem - 0.5px);
+                top: 0.65rem;
+                width: 10px;
+                height: 10px;
+            }
+
+            .role__title {
+                font-size: 1.02rem;
+            }
+
+            .role__meta,
+            .role__tools {
+                font-size: 0.82rem;
+            }
+
+            .role__list li {
+                padding-left: 1rem;
+                margin-bottom: 0.7rem;
+            }
+
+            /* Cards verticais de projetos */
+            .card {
+                padding: 1.1rem;
+                border-radius: 14px;
+            }
+
+            .card__cta {
+                min-height: 2.75rem;
+                margin-top: 0.4rem;
+            }
+
+            /* Etapas dos cases em coluna única */
+            .entry {
+                grid-template-columns: 1fr;
+                row-gap: 0.3rem;
+            }
+
+            .entry__label {
+                font-size: 0.82rem;
+                font-weight: var(--weight-semibold);
+                color: var(--color-muted);
+            }
+
+            .case__head { margin-top: 1.25rem; }
+            .case__title { font-size: 1.25rem; }
+            .case__lead { font-size: 1rem; }
+
+            .case__media {
+                margin-top: 1.5rem;
+                padding: 0.5rem;
+                border-radius: 14px;
+            }
+
+            .case__cover {
+                max-height: 16rem;
+                border-radius: 8px;
+            }
+
+            /* Galeria em grade 2x2 limpa e sem sobreposição/rotação excessiva */
+            .gallery {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.85rem;
+                margin: 2rem 0 0.6rem;
+                padding: 0;
+            }
+
+            .gallery__item,
+            .gallery__item:first-child {
+                width: 100%;
+                margin-left: 0;
+                aspect-ratio: 3 / 4;
+                border-radius: 14px;
+                box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.25);
+                transform: none;
+            }
+
+            .gallery__item:nth-child(n) {
+                --rotate: 0deg;
+                --lift: 0px;
+                transform: none;
+            }
+
+            .gallery__caption {
+                text-align: left;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .page {
+                padding: 2rem 1rem calc(4rem + env(safe-area-inset-bottom, 0px));
+            }
+
+            .gallery {
+                gap: 0.65rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
         }
     </style>
 </head>
 <body>
-<div class="wrap">
-    <!-- Cabeçalho com Nome e Menu Centralizado -->
-    <header>
-        <div class="name">Wilder Miranda</div>
-        
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
-            <span></span><span></span><span></span>
-        </button>
+<div class="page" id="inicio">
 
-        <nav id="menu" role="tablist" aria-label="Seções do site">
-            <button role="tab" id="tab-sobre" aria-selected="true" aria-controls="sobre">Sobre mim</button>
-            <button role="tab" id="tab-experiencia" aria-selected="false" aria-controls="experiencia">Experiência</button>
-            <button role="tab" id="tab-portfolio" aria-selected="false" aria-controls="portfolio">Portfólio</button>
-            <button role="tab" id="tab-contato" aria-selected="false" aria-controls="contato">Contato</button>
-        </nav>
+    <header class="intro">
+        <img class="intro__photo" src="./me.jpg" alt="Foto de perfil de Wilder Miranda" width="272" height="272" decoding="async">
+        <div>
+            <h1 class="intro__name">Wilder Miranda</h1>
+            <p class="intro__role">Analista de Dados</p>
+            <a class="chip" href="./Wilder Miranda.pdf" download="Wilder Miranda.pdf">Baixar currículo</a>
+        </div>
     </header>
 
     <main>
-        <!-- 1. SEÇÃO SOBRE MIM -->
-        <section id="sobre" role="tabpanel" aria-labelledby="tab-sobre">
-            <img class="portrait" src="./me.jpg" alt="Foto de perfil de Wilder Miranda">
-            <h1>Analista de Dados</h1>
-            <p>Analista com experiência em logística e na área comercial do Grupo GPS, empresa especializada em serviços terceirizados. Como Analista Comercial, desenvolvi uma ferramenta de automação em <b>Excel</b> que reduziu em 80% o tempo de elaboração de propostas. Antes, como Analista de Projetos, trabalhei com mapeamento de processos (BPMN), Cronoanálise e indicadores para áreas técnicas e gestores.</p>
-            <p>Atualmente direciono essa base para a análise de dados, resolvendo problemas de negócio com <b>SQL</b>, <b>Python</b> e <b>Power BI</b>.  Construí uma solução de dados completa respondendo os questionamentos de uma base de vendas de automóveis com consultas a um banco de dados <b>PostgreSQL</b> para extração dos dados e um dashboard interativo com <b>Python</b> para visualização e exploração dos principais indicadores de desempenho, que você pode conferir no portfólio.</p>
-
-            <!-- Download do currículo -->
-            <a class="btn-download" href="./Wilder Miranda.pdf" download="Wilder Miranda.pdf">
-                <i class="fa-solid fa-download" aria-hidden="true"></i> Baixar currículo
-            </a>
+        <!-- SOBRE -->
+        <section class="section" id="sobre" aria-labelledby="titulo-sobre">
+            <h2 class="section__title" id="titulo-sobre">Sobre</h2>
+            <div class="prose">
+                <p>Analista com experiência em logística e na área comercial do Grupo GPS, empresa especializada em serviços terceirizados. Como Analista Comercial, desenvolvi uma ferramenta de automação em Excel que reduziu em 80% o tempo de elaboração de propostas. Antes, como Analista de Projetos, trabalhei com mapeamento de processos (BPMN), Cronoanálise e indicadores para áreas técnicas e gestores.</p>
+                <p>Atualmente direciono essa base para a análise de dados, resolvendo problemas de negócio com SQL, Python e Power BI. Construí uma solução de dados completa respondendo os questionamentos de uma base de vendas de automóveis com consultas a um banco de dados <b>PostgreSQL</b> para extração dos dados e um dashboard interativo com <b>Python</b> para visualização e exploração dos principais indicadores de desempenho, que você pode conferir no portfólio.</p>
+            </div>
         </section>
 
-        <!-- 2. SEÇÃO EXPERIÊNCIA -->
-        <section id="experiencia" role="tabpanel" aria-labelledby="tab-experiencia" hidden>
-            <h1>Experiência</h1>
+        <!-- EXPERIÊNCIA -->
+        <section class="section" id="experiencia" aria-labelledby="titulo-experiencia">
+            <h2 class="section__title" id="titulo-experiencia">Experiência</h2>
 
             <ol class="timeline">
                 <li class="role">
-                    <h2>Analista Comercial</h2>
-                    <div class="role-meta">Grupo GPS • Julho 2025 – Setembro 2026</div>
-                    <div class="role-tools">Excel • PowerPoint • Orçamentação</div>
-                    <ul class="role-list">
+                    <h3 class="role__title">Analista Comercial</h3>
+                    <div class="role__meta">Grupo GPS • Julho 2025 – Setembro 2026</div>
+                    <div class="role__tools">Excel • PowerPoint • Orçamentação</div>
+                    <ul class="role__list">
                         <li>Desenvolvi uma ferramenta de automação orçamentária em Excel com preenchimento dinâmico, que centraliza a base de custos de mão de obra e equipamentos e distribui as informações para as demais frentes da proposta, reduzindo em <b>80%</b> o tempo de elaboração de propostas comerciais.</li>
                         <li>Criei uma solução em Excel que centraliza o status de todos os contratos da companhia, permitindo ao Diretor acompanhar a acuracidade dos contratos regularizados e atuar sobre pendências (sem cláusula de reajuste, sem assinatura ou com cliente inexistente).</li>
                         <li>Elaborei minutas contratuais e apresentações comerciais em PowerPoint, traduzindo requisitos técnicos em documentos claros para clientes e parceiros.</li>
@@ -626,10 +679,10 @@
                 </li>
 
                 <li class="role">
-                    <h2>Analista de Projetos Júnior</h2>
-                    <div class="role-meta">Grupo GPS • Novembro 2024 – Julho 2025</div>
-                    <div class="role-tools">BPMN • Cronoanálise • Excel</div>
-                    <ul class="role-list">
+                    <h3 class="role__title">Analista de Projetos Júnior</h3>
+                    <div class="role__meta">Grupo GPS • Novembro 2024 – Julho 2025</div>
+                    <div class="role__tools">BPMN • Cronoanálise • Excel</div>
+                    <ul class="role__list">
                         <li>Mapeei e diagnostiquei processos operacionais da área de logística, identificando gargalos e oportunidades de aumento do rendimento operacional.</li>
                         <li>Padronizei processos críticos com fluxogramas em BPMN e POPs (Procedimentos Operacionais Padrão), garantindo retenção de conhecimento e conformidade operacional.</li>
                         <li>Conduzi estudos de Tempos e Movimentos (Cronoanálise) para definir KPIs de produtividade, otimizar postos de trabalho e dimensionar headcount.</li>
@@ -639,116 +692,204 @@
                 </li>
             </ol>
 
-            <!-- Galeria da vivência na operação: troque os 4 src abaixo pelas suas fotos (ex.: ./operacao-1.jpg) e ajuste os alt -->
-            <div class="gallery">
-                <figure><img src="./1.jpg" alt="Foto 1 da vivência na operação" width="600" height="800" loading="lazy"></figure>
-                <figure><img src="./2.jpg" alt="Foto 2 da vivência na operação" width="600" height="800" loading="lazy"></figure>
-                <figure><img src="./3.jpg" alt="Foto 3 da vivência na operação" width="600" height="800" loading="lazy"></figure>
-                <figure><img src="./4.jpg" alt="Foto 4 da vivência na operação" width="600" height="800" loading="lazy"></figure>
+            <!-- Troque os 4 src pelas suas fotos e ajuste os alt -->
+            <div class="gallery" role="group" aria-label="Fotos da vivência na operação">
+                <figure class="gallery__item"><img src="./1.jpg" alt="Foto 1 da vivência na operação" width="600" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="gallery__item"><img src="./2.jpg" alt="Foto 2 da vivência na operação" width="600" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="gallery__item"><img src="./3.jpg" alt="Foto 3 da vivência na operação" width="600" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="gallery__item"><img src="./4.jpg" alt="Foto 4 da vivência na operação" width="600" height="800" loading="lazy" decoding="async"></figure>
             </div>
-            <div class="gallery-caption"><span></span><span>Grupo GPS</span></div>
+            <p class="gallery__caption">Grupo GPS</p>
         </section>
 
-        <!-- 3. SEÇÃO PORTFÓLIO -->
-        <section id="portfolio" role="tabpanel" aria-labelledby="tab-portfolio" hidden>
-            <ul class="portfolio">
-                <li>
-                    <img src="./contratos.png" alt="Visualização do Dashboard de Gestão de Contratos" loading="lazy">
-                    <h2>Gestão de Contratos</h2>
-                    <div class="tags">Excel • Power Query • Tabela Dinâmica</div>
-                    <p>Dashboard interativo projetado para explorar dados, cruzar informações estratégicas e extrair insights valiosos no próprio Excel.</p>
-                    <div class="portfolio-links">
-                        <a class="link-btn" href="https://www.youtube.com/watch?v=yniZXFbitWw&t=15s" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-youtube"></i> Assistir Vídeo
-                        </a>
-                    </div>
-                </li>
+        <!-- PORTFÓLIO -->
+        <section class="section" id="portfolio" aria-labelledby="titulo-portfolio">
+            <h2 class="section__title" id="titulo-portfolio">Portfólio</h2>
 
+            <ul class="cards">
                 <li>
-                    <img src="./sales-metrics.png" alt="Visualização do Dashboard de Vendas de Automóveis" loading="lazy">
-                    <h2>Dashboard de Vendas de Automóveis</h2>
-                    <div class="tags">Python • Streamlit • PostgreSQL • Plotly</div>
-                    <p>Projeto prático de análise de dados onde dados brutos armazenados em PostgreSQL foram transformados em um painel interativo dinâmico.</p>
-                    <div class="portfolio-links">
-                        <a class="link-btn" href="https://www.youtube.com/watch?v=Rnu03wLBQzU&t=46s" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-youtube"></i> Assistir Vídeo
-                        </a>
-                        <a class="link-btn" href="https://github.com/wildermiranda/SalesDashboard" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-github"></i> Código Fonte
-                        </a>
-                    </div>
+                    <a class="card" href="#gestao-de-contratos">
+                        <div class="card__body">
+                            <h3 class="card__title">Gestão de Contratos</h3>
+                            <p>Dashboard interativo projetado para explorar dados, cruzar informações estratégicas e extrair insights valiosos no próprio Excel.</p>
+                            <span class="card__cta">Ver case</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="card" href="#dashboard-de-vendas">
+                        <div class="card__body">
+                            <h3 class="card__title">Dashboard de Vendas de Automóveis</h3>
+                            <p>Projeto prático de análise de dados onde dados brutos armazenados em PostgreSQL foram transformados em um painel interativo dinâmico.</p>
+                            <span class="card__cta">Ver case</span>
+                        </div>
+                    </a>
                 </li>
             </ul>
         </section>
 
-        <!-- 4. SEÇÃO CONTATO -->
-        <section id="contato" role="tabpanel" aria-labelledby="tab-contato" hidden>
-            <h1>Vamos conversar?</h1>
-            <p class="muted-text">Fique à vontade para entrar em contato.</p>
-            <ul class="contact-list">
-                <li>
+        <!-- CONTATO -->
+        <section class="section" id="contato" aria-labelledby="titulo-contato">
+            <h2 class="section__title" id="titulo-contato">Contato</h2>
+            <p class="contact__intro">Vamos conversar? Fique à vontade para entrar em contato.</p>
+            <ul class="rows">
+                <li class="row">
                     <span>E-mail</span>
-                    <a class="link-btn" href="mailto:contatowildermiranda@gmail.com">contatowildermiranda@gmail.com</a>
+                    <a href="mailto:contatowildermiranda@gmail.com">contatowildermiranda@gmail.com</a>
                 </li>
-                <li>
+                <li class="row">
                     <span>LinkedIn</span>
-                    <a class="link-btn" href="https://www.linkedin.com/in/wildermiranda" target="_blank" rel="noopener noreferrer">linkedin.com/in/wildermiranda</a>
+                    <a href="https://www.linkedin.com/in/wildermiranda" target="_blank" rel="noopener noreferrer">linkedin.com/in/wildermiranda</a>
                 </li>
-                <li>
+                <li class="row">
                     <span>GitHub</span>
-                    <a class="link-btn" href="https://github.com/wildermiranda" target="_blank" rel="noopener noreferrer">github.com/wildermiranda</a>
+                    <a href="https://github.com/wildermiranda" target="_blank" rel="noopener noreferrer">github.com/wildermiranda</a>
                 </li>
             </ul>
         </section>
     </main>
+
 </div>
 
-<!-- Lógica JavaScript (Apenas para Troca de Abas) -->
+<div class="page" id="gestao-de-contratos" data-view data-title="Gestão de Contratos | Wilder Miranda">
+
+    <a class="back" href="#portfolio">Voltar</a>
+
+    <header class="case__head">
+        <h1 class="case__title" tabindex="-1">Gestão de Contratos</h1>
+        <p class="case__lead">Painel interativo em Excel que reúne o status de todos os contratos da companhia e mostra, em um só lugar, quais precisam de ação.</p>
+    </header>
+    <div class="case__media">
+        <img class="case__cover" src="./contratos.png" alt="Visualização do Dashboard de Gestão de Contratos" width="1600" height="900" decoding="async">
+    </div>
+
+    <main>
+        <section class="section" id="contratos-especificacoes" aria-labelledby="t-contratos-especificacoes">
+            <h2 class="section__title" id="t-contratos-especificacoes">Especificações</h2>
+            <dl class="rows">
+                <div class="row"><dt>Tipo</dt><dd>Dashboard interativo</dd></div>
+                <div class="row"><dt>Ferramentas</dt><dd>Excel, Power Query, Tabela Dinâmica</dd></div>
+                <div class="row"><dt>Contexto</dt><dd>Área comercial do Grupo GPS</dd></div>
+                <div class="row"><dt>Vídeo</dt><dd><a href="https://www.youtube.com/watch?v=yniZXFbitWw&amp;t=15s" target="_blank" rel="noopener noreferrer">Assistir vídeo</a></dd></div>
+            </dl>
+        </section>
+        <section class="section" id="contratos-desafio" aria-labelledby="t-contratos-desafio">
+            <h2 class="section__title" id="t-contratos-desafio">Desafio</h2>
+            <div class="prose">
+                <p>Acompanhar os contratos de uma companhia exige uma visão única: quais estão regularizados, com que acuracidade e quais pendências precisam de ação. O desafio era reunir essa informação em um só lugar, de forma que a Diretoria pudesse explorá-la sem depender de relatórios manuais.</p>
+            </div>
+        </section>
+        <section class="section" id="contratos-solucao" aria-labelledby="t-contratos-solucao">
+            <h2 class="section__title" id="t-contratos-solucao">Solução</h2>
+            <div class="prose">
+                <p>Construí o painel inteiramente no Excel. O Power Query importa e padroniza os dados dos contratos, e as Tabelas Dinâmicas cruzam as informações e alimentam as visões do painel. A pessoa que usa explora os dados e filtra os cruzamentos sem sair do Excel.</p>
+                <p>O painel destaca três tipos de pendência:</p>
+            </div>
+            <ul class="list">
+                <li>Contratos sem cláusula de reajuste</li>
+                <li>Contratos sem assinatura</li>
+                <li>Contratos com cliente inexistente</li>
+            </ul>
+        </section>
+        <section class="section" id="contratos-resultado" aria-labelledby="t-contratos-resultado">
+            <h2 class="section__title" id="t-contratos-resultado">Resultado</h2>
+            <div class="prose">
+                <p>O Diretor passou a acompanhar a acuracidade dos contratos regularizados e a atuar sobre as pendências a partir de uma única fonte, que concentra o status de todos os contratos da companhia.</p>
+            </div>
+        </section>
+    </main>
+
+    <nav class="section" aria-label="Outros projetos">
+        <div class="rows">
+            <div class="row"><span>Próximo projeto</span><a href="#dashboard-de-vendas">Dashboard de Vendas de Automóveis</a></div>
+        </div>
+    </nav>
+
+</div>
+
+<div class="page" id="dashboard-de-vendas" data-view data-title="Dashboard de Vendas de Automóveis | Wilder Miranda">
+
+    <a class="back" href="#portfolio">Voltar</a>
+
+    <header class="case__head">
+        <h1 class="case__title" tabindex="-1">Dashboard de Vendas de Automóveis</h1>
+        <p class="case__lead">Solução de dados completa, do banco de dados ao painel interativo, que responde às perguntas de negócio de uma base de vendas de automóveis.</p>
+    </header>
+    <div class="case__media">
+        <img class="case__cover" src="./sales-metrics.png" alt="Visualização do Dashboard de Vendas de Automóveis" width="1600" height="900" decoding="async">
+    </div>
+
+    <main>
+        <section class="section" id="vendas-especificacoes" aria-labelledby="t-vendas-especificacoes">
+            <h2 class="section__title" id="t-vendas-especificacoes">Especificações</h2>
+            <dl class="rows">
+                <div class="row"><dt>Tipo</dt><dd>Projeto prático de análise de dados</dd></div>
+                <div class="row"><dt>Ferramentas</dt><dd>PostgreSQL, SQL, Python, Streamlit, Plotly</dd></div>
+                <div class="row"><dt>Contexto</dt><dd>Base de vendas de automóveis</dd></div>
+                <div class="row"><dt>Vídeo</dt><dd><a href="https://www.youtube.com/watch?v=Rnu03wLBQzU&amp;t=46s" target="_blank" rel="noopener noreferrer">Assistir vídeo</a></dd></div>
+                <div class="row"><dt>Código-fonte</dt><dd><a href="https://github.com/wildermiranda/SalesDashboard" target="_blank" rel="noopener noreferrer">github.com/wildermiranda/SalesDashboard</a></dd></div>
+            </dl>
+        </section>
+        <section class="section" id="vendas-desafio" aria-labelledby="t-vendas-desafio">
+            <h2 class="section__title" id="t-vendas-desafio">Desafio</h2>
+            <div class="prose">
+                <p>Transformar dados brutos de vendas em respostas que qualquer pessoa consiga explorar, sem precisar escrever consultas. O projeto cobre o caminho inteiro: do armazenamento dos dados até a visualização dos indicadores.</p>
+            </div>
+        </section>
+        <section class="section" id="vendas-como-funciona" aria-labelledby="t-vendas-como-funciona">
+            <h2 class="section__title" id="t-vendas-como-funciona">Solução</h2>
+            <ol class="entries entries--compact">
+                <li class="entry"><div class="entry__label">Armazenamento</div><p>Os dados brutos de vendas ficam armazenados em um banco PostgreSQL.</p></li>
+                <li class="entry"><div class="entry__label">Extração</div><p>Consultas SQL extraem do banco os dados necessários para responder aos questionamentos sobre as vendas.</p></li>
+                <li class="entry"><div class="entry__label">Visualização</div><p>Um painel em Python, com Streamlit, transforma o resultado das consultas em gráficos interativos com Plotly.</p></li>
+                <li class="entry"><div class="entry__label">Exploração</div><p>O painel permite explorar os principais indicadores de desempenho de forma dinâmica.</p></li>
+            </ol>
+        </section>
+        <section class="section" id="vendas-resultado" aria-labelledby="t-vendas-resultado">
+            <h2 class="section__title" id="t-vendas-resultado">Resultado</h2>
+            <div class="prose">
+                <p>Um painel interativo e dinâmico, construído sobre dados brutos e com o código-fonte disponível no GitHub.</p>
+            </div>
+        </section>
+    </main>
+
+    <nav class="section" aria-label="Outros projetos">
+        <div class="rows">
+            <div class="row"><span>Próximo projeto</span><a href="#gestao-de-contratos">Gestão de Contratos</a></div>
+        </div>
+    </nav>
+
+</div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const tabs = document.querySelectorAll('[role="tab"]');
-        const panels = document.querySelectorAll('[role="tabpanel"]');
+    /* Navegação entre a página inicial e as páginas de projeto, por hash (#gestao-de-contratos).
+       Sem JavaScript, todas as seções aparecem em sequência e os links continuam funcionando como âncoras. */
+    (() => {
+        const home = document.getElementById('inicio');
+        const views = [...document.querySelectorAll('[data-view]')];
+        const homeTitle = document.title;
+        const toTop = () => window.scrollTo({ top: 0, behavior: 'instant' });
 
-        const toggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
+        function render() {
+            const id = decodeURIComponent(location.hash.slice(1));
+            const view = views.find(v => v.id === id);
 
-        function setMenu(open) {
-            menu.classList.toggle('open', open);
-            toggle.setAttribute('aria-expanded', open);
-            toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+            home.hidden = Boolean(view);
+            views.forEach(v => { v.hidden = v !== view; });
+            document.title = view ? view.dataset.title : homeTitle;
+
+            if (view) {
+                toTop();
+                view.querySelector('h1').focus({ preventScroll: true });
+                return;
+            }
+            const target = id && document.getElementById(id);
+            if (target) target.scrollIntoView(); else toTop();
         }
 
-        toggle.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
-
-        // Fecha ao clicar fora ou ao pressionar Esc
-        document.addEventListener('click', e => {
-            if (!menu.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
-        });
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); toggle.focus(); }
-        });
-
-        // Fecha ao voltar para a tela larga
-        window.matchMedia('(min-width: 641px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
-
-        function showTab(id) {
-            tabs.forEach(t => t.setAttribute('aria-selected', t.getAttribute('aria-controls') === id));
-            panels.forEach(p => p.hidden = p.id !== id);
-        }
-
-        tabs.forEach(t => t.addEventListener('click', () => {
-            const id = t.getAttribute('aria-controls');
-            showTab(id);
-            setMenu(false);
-            history.replaceState(null, '', '#' + id);
-        }));
-
-        // Ativa a aba inicial caso haja hash na URL (ex: #portfolio)
-        const initialHash = location.hash.slice(1);
-        if (['sobre', 'experiencia', 'portfolio', 'contato'].includes(initialHash)) {
-            showTab(initialHash);
-        }
-    });
+        window.addEventListener('hashchange', render);
+        render();
+    })();
 </script>
 </body>
 </html>
