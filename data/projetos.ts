@@ -11,6 +11,7 @@ export interface ProjetoEtapa {
 
 export interface Projeto {
   slug: string;
+  img: string;
   title: string;
   shortDescription: string;
   lead: string;
@@ -30,6 +31,7 @@ export interface Projeto {
 export const PROJETOS: Projeto[] = [
   {
     slug: "gestao-de-contratos",
+    img: "/gestão-de-contratos.svg",
     title: "Gestão de Contratos",
     shortDescription:
       "Dashboard interativo projetado para explorar dados, cruzar informações estratégicas e extrair insights valiosos no próprio Excel.",
@@ -67,11 +69,12 @@ export const PROJETOS: Projeto[] = [
   },
   {
     slug: "dashboard-de-vendas",
+    img: "/dashboard-de-vendas.svg",
     title: "Dashboard de Vendas de Automóveis",
     shortDescription:
       "Projeto prático de análise de dados onde dados brutos armazenados em PostgreSQL foram transformados em um painel interativo dinâmico.",
     lead: "Solução de dados completa, do banco de dados ao painel interativo, que responde às perguntas de negócio de uma base de vendas de automóveis.",
-    coverSrc: "/sales-metrics.png",
+    coverSrc: "/dashboard-de-vendas.png",
     coverAlt: "Visualização do Dashboard de Vendas de Automóveis",
     specifications: [
       { label: "Tipo", value: "Projeto prático de análise de dados" },

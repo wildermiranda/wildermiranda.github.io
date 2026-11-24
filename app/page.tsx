@@ -209,9 +209,20 @@ export default function HomePage() {
               <li key={projeto.slug} className="flex">
                 <Link
                   href={`/projetos/${projeto.slug}`}
-                  className="group flex-1 flex flex-col gap-3 p-[1.1rem] sm:px-[1.3rem] sm:py-[1.2rem] rounded-[14px] sm:rounded-[16px] bg-[#f6f6f6] hover:bg-[#ececec] active:bg-[#ececec] text-[#555555] no-underline transition-colors"
+                  className="group flex-1 flex flex-col gap-3 p-[1.1rem] sm:px-[1.3rem] sm:py-[1.2rem] rounded-[14px] sm:rounded-[16px] bg-[#f6f6f6] text-[#555555] no-underline"
                 >
                   <div className="flex-1 flex flex-col gap-[0.35rem]">
+                    <div className="overflow-hidden rounded-[10px] sm:rounded-[12px] mb-[0.4rem]">
+                      <img
+                        src={projeto.img}
+                        alt=""
+                        width={1000}
+                        height={420}
+                        loading="lazy"
+                        decoding="async"
+                        className="block w-full h-auto aspect-[1000/420] object-contain transition-transform duration-500 ease-out group-hover:scale-105 group-focus-visible:scale-105"
+                      />
+                    </div>
                     <h3 className="text-[1rem] font-semibold leading-[1.4] text-[#111111]">
                       {projeto.title}
                     </h3>
